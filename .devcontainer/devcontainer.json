@@ -1,0 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ruby
+{
+    "name": "Kompatchi Dev enviroment",
+    "dockerComposeFile": "../docker-compose.yml",
+    "workspaceFolder": "/workspace",
+    "service": "app",
+    "runServices": ["db"],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "pkief.material-icon-theme",
+                "castwide.solargraph",
+                "koichisasada.vscode-rdbg",
+                "vincaslt.highlight-matching-tag",
+                "dbaeumer.vscode-eslint",
+                "bradlc.vscode-tailwindcss",
+                "esbenp.prettier-vscode",
+                "ritwickdey.liveserver"
+            ]
+        }
+    }
+    // "postCreateCommand": "npm install -D tailwindcss postcss autoprefixer prettier eslint @eslint/js globals"
+}
