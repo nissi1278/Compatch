@@ -1,11 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.2.0">
   <diagram name="ページ1" id="xRGNwxMNGRdQZDNXrrtV">
-    <mxGraphModel dx="925" dy="512" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1092" dy="587" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-1" value="幹事・まとめ役" style="swimlane;" parent="1" vertex="1">
-          <mxGeometry x="80" y="40" width="280" height="800" as="geometry" />
+          <mxGeometry x="80" y="40" width="280" height="920" as="geometry" />
         </mxCell>
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="-nS3WrP1ut2kfaQxKN1v-3" target="-nS3WrP1ut2kfaQxKN1v-5" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -13,13 +13,13 @@
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-3" value="飲み会終了&lt;br&gt;合計支払い金額の把握" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="40" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="-nS3WrP1ut2kfaQxKN1v-4" value="[アプリ操作] グループ&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;を作成&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
+        <mxCell id="-nS3WrP1ut2kfaQxKN1v-4" value="[アプリ操作] グループ&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;を作成&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="100" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="-nS3WrP1ut2kfaQxKN1v-5" target="-nS3WrP1ut2kfaQxKN1v-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="-nS3WrP1ut2kfaQxKN1v-5" value="[アプリ操作] グループ名・参加人数・支払金額を入力" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
+        <mxCell id="-nS3WrP1ut2kfaQxKN1v-5" value="[アプリ操作] グループ名・参加人数・支払金額を入力" style="rounded=0;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="160" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="-nS3WrP1ut2kfaQxKN1v-6" edge="1">
@@ -40,22 +40,22 @@
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-6" value="支払い量の調整が必要な&lt;br&gt;参加者がいる" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="230" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="-nS3WrP1ut2kfaQxKN1v-23" value="[アプリ操作] 計算結果を表示" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
+        <mxCell id="-nS3WrP1ut2kfaQxKN1v-23" value="[アプリ操作] 計算結果を表示" style="rounded=0;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="505" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="ALnpyHXO3Uof6fs2yUtS-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="ALnpyHXO3Uof6fs2yUtS-3" target="ALnpyHXO3Uof6fs2yUtS-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-3" value="お店に支払い" style="whiteSpace=wrap;html=1;rounded=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
-          <mxGeometry x="40" y="645" width="200" height="40" as="geometry" />
+        <mxCell id="ALnpyHXO3Uof6fs2yUtS-3" value="お店に支払い" style="whiteSpace=wrap;html=1;rounded=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
+          <mxGeometry x="40" y="750" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="ALnpyHXO3Uof6fs2yUtS-9" value="終了" style="whiteSpace=wrap;html=1;rounded=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
-          <mxGeometry x="40" y="715" width="200" height="40" as="geometry" />
+          <mxGeometry x="40" y="822" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="ALnpyHXO3Uof6fs2yUtS-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="-nS3WrP1ut2kfaQxKN1v-21" target="ALnpyHXO3Uof6fs2yUtS-23" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="-nS3WrP1ut2kfaQxKN1v-21" value="[アプリ操作] 個別調整項目を入力&lt;br&gt;(金額固定・割合調節)" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
+        <mxCell id="-nS3WrP1ut2kfaQxKN1v-21" value="[アプリ操作] 個別調整項目を入力&lt;br&gt;(金額固定・割合調節)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="353" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="-nS3WrP1ut2kfaQxKN1v-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="-nS3WrP1ut2kfaQxKN1v-6" target="-nS3WrP1ut2kfaQxKN1v-21" edge="1">
@@ -66,7 +66,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-23" value="[アプリ操作] 支払金額の再計算を実施" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
+        <mxCell id="ALnpyHXO3Uof6fs2yUtS-23" value="[アプリ操作] 支払金額の再計算を実施" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-1" vertex="1">
           <mxGeometry x="40" y="430" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="ALnpyHXO3Uof6fs2yUtS-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="-nS3WrP1ut2kfaQxKN1v-1" source="ALnpyHXO3Uof6fs2yUtS-23" target="-nS3WrP1ut2kfaQxKN1v-23" edge="1">
@@ -74,41 +74,58 @@
             <mxPoint x="140" y="510" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-nS3WrP1ut2kfaQxKN1v-2" value="参加者" style="swimlane;" parent="1" vertex="1">
-          <mxGeometry x="360" y="40" width="280" height="800" as="geometry" />
+        <mxCell id="3CtEIimDd-_pU02D69PX-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="-nS3WrP1ut2kfaQxKN1v-1" target="-nS3WrP1ut2kfaQxKN1v-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320.07142857142856" y="680.0185714285714" as="sourcePoint" />
+            <mxPoint x="250" y="369.99" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="680" />
+              <mxPoint x="300" y="373" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-1" value="支払金額を幹事に提出" style="whiteSpace=wrap;html=1;rounded=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-2" vertex="1">
+        <mxCell id="3CtEIimDd-_pU02D69PX-15" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="3CtEIimDd-_pU02D69PX-13">
+          <mxGeometry x="-0.8953" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-nS3WrP1ut2kfaQxKN1v-2" value="参加者" style="swimlane;" parent="1" vertex="1">
+          <mxGeometry x="360" y="40" width="280" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="3CtEIimDd-_pU02D69PX-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="-nS3WrP1ut2kfaQxKN1v-2" source="ALnpyHXO3Uof6fs2yUtS-1" target="3CtEIimDd-_pU02D69PX-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ALnpyHXO3Uof6fs2yUtS-1" value="調整後の支払い金額を確認" style="whiteSpace=wrap;html=1;rounded=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="-nS3WrP1ut2kfaQxKN1v-2" vertex="1">
           <mxGeometry x="40" y="574" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="ALnpyHXO3Uof6fs2yUtS-11" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="220" y="685" as="targetPoint" />
+        <mxCell id="3CtEIimDd-_pU02D69PX-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="-nS3WrP1ut2kfaQxKN1v-2" source="3CtEIimDd-_pU02D69PX-4" target="3CtEIimDd-_pU02D69PX-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3CtEIimDd-_pU02D69PX-9" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="3CtEIimDd-_pU02D69PX-7">
+          <mxGeometry x="0.2687" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="ALnpyHXO3Uof6fs2yUtS-11" target="ALnpyHXO3Uof6fs2yUtS-1" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="320" y="625" />
-              <mxPoint x="391" y="625" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="3CtEIimDd-_pU02D69PX-4" value="各参加者が支払い金額に&lt;br&gt;納得" style="rhombus;whiteSpace=wrap;html=1;rounded=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="-nS3WrP1ut2kfaQxKN1v-2">
+          <mxGeometry x="40" y="640" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-11" value="各参加者から支払い金額を徴収" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;" parent="1" vertex="1">
+        <mxCell id="3CtEIimDd-_pU02D69PX-6" value="各参加者は支払金額を幹事に提出" style="whiteSpace=wrap;html=1;rounded=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="-nS3WrP1ut2kfaQxKN1v-2">
+          <mxGeometry x="40" y="750" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3CtEIimDd-_pU02D69PX-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ALnpyHXO3Uof6fs2yUtS-11" target="ALnpyHXO3Uof6fs2yUtS-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ALnpyHXO3Uof6fs2yUtS-11" value="[アプリ操作] 個別調整後の計算結果を参加者へ共有/通知 " style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;" parent="1" vertex="1">
           <mxGeometry x="120" y="614" width="200" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="ALnpyHXO3Uof6fs2yUtS-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="ALnpyHXO3Uof6fs2yUtS-1" target="ALnpyHXO3Uof6fs2yUtS-11" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="380" y="644" />
-              <mxPoint x="380" y="644" />
-            </Array>
-          </mxGeometry>
         </mxCell>
         <mxCell id="ALnpyHXO3Uof6fs2yUtS-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="-nS3WrP1ut2kfaQxKN1v-23" target="ALnpyHXO3Uof6fs2yUtS-11" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="400" y="515" as="sourcePoint" />
             <mxPoint x="400" y="585" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="3CtEIimDd-_pU02D69PX-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3CtEIimDd-_pU02D69PX-6" target="ALnpyHXO3Uof6fs2yUtS-3">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
