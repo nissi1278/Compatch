@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="28.0.4">
+  <diagram name="ページ1" id="_yaAQI0uLjgClfAq2I8h">
+    <mxGraphModel dx="612" dy="931" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3_S_ea6MN-vv-nrupcCX-1" target="3_S_ea6MN-vv-nrupcCX-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-1" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(252, 252, 252)); font-size: 16px;&quot; face=&quot;Helvetica&quot;&gt;ブラウザ&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3_S_ea6MN-vv-nrupcCX-2" target="3_S_ea6MN-vv-nrupcCX-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-2" value="&lt;font style=&quot;color: light-dark(rgb(252, 252, 252), rgb(255, 255, 255)); font-size: 16px;&quot;&gt;フロントエンド&lt;br&gt;Rails View&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3_S_ea6MN-vv-nrupcCX-4" target="3_S_ea6MN-vv-nrupcCX-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-4" value="&lt;font style=&quot;color: light-dark(rgb(252, 252, 252), rgb(255, 255, 255)); font-size: 16px;&quot;&gt;バックエンド&lt;br&gt;Rails&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="360" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3_S_ea6MN-vv-nrupcCX-6" value="&lt;font style=&quot;color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255));&quot;&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;MySQL&lt;/span&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

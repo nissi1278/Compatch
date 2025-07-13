@@ -18,3 +18,4 @@
 ![ER図](/document/design_assets/entity_relationship_diagram.drawio.png)
 
 ## システム構成図
+![システム構成図](/document/design_assets/system_configuration_diagram.drawio.png)
