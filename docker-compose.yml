@@ -1,0 +1,41 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: kompatchi-dev
+        volumes:
+            - type: bind
+              source: '.'
+              target: '/workspace'
+        depends_on:
+            - db
+        environment:
+            - DB_HOST=db
+            - DB_USER=${MYSQL_USER_NAME}
+            - DB_PASSWORD=${MYSQL_USER_PASSWORD}
+        networks:
+            - dev_net
+        command: 'tail -f /dev/null'
+        ports:
+            - '3001:3001'
+    db:
+        image: mysql:8.4.4
+        container_name: kompatchi-db
+        ports:
+            - '3307:3306'
+        restart: always
+        volumes:
+            - db-data:/var/lib/mysql # データをボリュームに永久保存
+        environment:
+            # .envにパスワードは記載
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: kompatchi
+            MYSQL_USER: ${MYSQL_USER_NAME}
+            MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
+        networks:
+            - dev_net
+volumes:
+    db-data:
+networks:
+    dev_net:
