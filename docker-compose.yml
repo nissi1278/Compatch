@@ -3,7 +3,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: kompatchi-dev
+        container_name: compatch-dev
         volumes:
             - type: bind
               source: '.'
@@ -16,21 +16,21 @@ services:
             - DB_PASSWORD=${MYSQL_USER_PASSWORD}
         networks:
             - dev_net
-        command: 'tail -f /dev/null'
+        command: 'rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0'
         ports:
-            - '3001:3001'
+            - '3000:3000'
     db:
         image: mysql:8.4.4
-        container_name: kompatchi-db
+        container_name: compatch-db
         ports:
-            - '3307:3306'
+            - '3308:3306'
         restart: always
         volumes:
             - db-data:/var/lib/mysql # データをボリュームに永久保存
         environment:
             # .envにパスワードは記載
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: kompatchi
+            MYSQL_DATABASE: Compatch
             MYSQL_USER: ${MYSQL_USER_NAME}
             MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
         networks:

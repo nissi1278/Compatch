@@ -1,4 +1,8 @@
 {
     "remote.autoForwardPortsFallback": 0,
-    "vsicons.presets.nestjs": true
+    "vsicons.presets.nestjs": true,
+    "cSpell.words": [
+        "compatch",
+        "pids"
+    ]
 }
