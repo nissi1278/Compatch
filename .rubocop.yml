@@ -1,21 +1,52 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
-
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 # Lint
 Lint/UnusedMethodArgument:
   Enabled: true
+Lint/UselessAssignment:
+  Enabled: true
 
 # style
-EnforcedStyle: single_quotes
-Style/FrozenStringLiteralComment: true
+Style/FrozenStringLiteralComment:
+  Enabled: true
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
 Style/WordArray: 
   EnforcedStyle: percent
 Style/HashSyntax: 
-  EnforcedStyle: percent
+  EnforcedStyle: ruby19
+
+# Layout
+Layout/LineLength:
+  Enabled: true
+  Max: 120
+
+# Rails
+Rails/ApplicationRecord:
+  Enabled: true
+Rails/CreateTableWithTimestamps:
+  Enabled: true
+Rails/FindById: 
+  Enabled: true
+Rails/NotNullColumn:
+  Enabled: true
+Rails/OutputSafety:
+  Enabled: true
+Rails/Presence:
+  Enabled: true
+Rails/Squish:
+  Enabled: true
+Rails/TimeZone:
+  Enabled: true
+Rails/Validation:
+  Enabled: true
+RSpec/FilePath:
+  Enabled: true
+RSpec/Its:
+  Enabled: true
