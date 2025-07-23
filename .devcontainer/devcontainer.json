@@ -19,6 +19,6 @@
                 "ritwickdey.liveserver"
             ]
         }
-    }
-    // "postCreateCommand": "npm install -D tailwindcss postcss autoprefixer prettier eslint @eslint/js globals"
+    },
+    "postStartCommand": "bash -c 'rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0'"
 }
