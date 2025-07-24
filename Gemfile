@@ -3,29 +3,17 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 gem "propshaft"
 gem "mysql2", "~> 0.5"
-gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
+gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
-
-# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
-
-# Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
 gem "kamal", require: false
-
-# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
@@ -35,10 +23,19 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
+  gem "guard", "~> 2.19.1"
+  gem "guard-rspec", "~> 4.7.3", require: false
+  gem "guard-rubocop", "~> 1.5.0", require: false
+  gem "rspec-rails", "~> 8.0.1"
+  gem "dotenv-rails", "~> 3.1.8"
+  gem "pry-byebug", "~> 3.11.0"
 end
 
 group :development do
   gem "web-console"
+  gem "solargraph", "~> 0.56.0", require: false
+  gem "solargraph-rails", "~> 1.2.0", require: false
+  gem "solargraph-rspec", "~> 0.5.2", require: false
 end
 
 group :test do
