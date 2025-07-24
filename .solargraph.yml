@@ -1,0 +1,29 @@
+---
+include:
+- "**/*.rb"
+exclude:
+- spec/**/*
+- test/**/*
+- log/**/*
+- tmp/**/*
+- db/migrate/**/*
+- vendor/**/*
+- ".bundle/**/*"
+- "node_modules/**/*"
+require: []
+domains: []
+reporters:
+- rubocop
+- require_not_found
+formatter:
+  rubocop:
+    cops: safe
+    except: []
+    only: []
+    extra_args: []
+require_paths: []
+plugins: [
+  "solargraph-rails",
+  "solargraph-rspec"
+]
+max_files: 5000
