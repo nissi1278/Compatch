@@ -1,0 +1,218 @@
+<div class="bg-light-gray min-vh-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 mb-4">
+        <div class="container">
+            <h1 class="text-center text-primary fw-bold fs-2 mb-0">Compatch</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container pb-5">
+        <!-- Group Creation Section -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+                <div class="card card-shadow border-0 p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calculator calculator-icon"></i>
+                        <h2 class="section-title mb-0">飲み会グループ作成</h2>
+                    </div>
+                    
+                    <p class="text-muted mb-4">飲み会のグループを作成しよう。</p>
+                    
+                    <!-- <%= form_with model: @group, local: true, class: "group-form" do |form| %>
+                        <div class="mb-4">
+                            <%= form.text_field :name, 
+                                class: "form-control input-field", 
+                                placeholder: "グループ名を入力",
+                                value: "新入社員歓迎会" %>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label text-muted">参加人数を選択してね。</label>
+                            <div class="participant-counter justify-content-between">
+                                <%= form.number_field :participant_count, 
+                                    value: 5, 
+                                    min: 1,
+                                    class: "border-0 bg-transparent fs-5",
+                                    style: "width: auto;" %>
+                                <button class="counter-btn" type="button" onclick="incrementCounter()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <%= form.submit "グループを作成", 
+                            class: "btn btn-primary btn-create-group w-100" do %>
+                            <i class="fas fa-plus me-2"></i>
+                            グループを作成
+                        <% end %>
+                    <% end %> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Groups Section -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center mb-4">
+                    <i class="fas fa-calculator calculator-icon"></i>
+                    <h2 class="section-title mb-0">最近作成したグループ</h2>
+                </div>
+                
+                <!-- Group Items -->
+                <!-- <% if @recent_groups.present? %>
+                    <% @recent_groups.each do |group| %>
+                        <div class="group-item p-4 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="fs-4 fw-semibold mb-1 text-dark"><%= group.name %></h3>
+                                    <p class="text-muted mb-0"><%= group.created_at.strftime("%Y/%m/%d") %>に作成</p>
+                                </div>
+                                <%= link_to group, method: :delete, 
+                                    class: "delete-btn",
+                                    confirm: "このグループを削除しますか？",
+                                    remote: true do %>
+                                    <i class="fas fa-trash-alt"></i>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <div class="text-center py-5">
+                        <p class="text-muted">まだグループが作成されていません。</p>
+                    </div>
+                <% end %> -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="fw-bold fs-3 mb-3">Compatch</h3>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <!-- <%= link_to "お問い合わせ", contact_path, class: "text-white text-decoration-none" %> -->
+                </div>
+            </div>
+            <hr class="border-light mt-4">
+            <div class="text-center pt-3">
+                <p class="mb-0 text-light">CompanyName @ 2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<style>
+    .bg-light-gray {
+        background-color: #f8f9fa;
+    }
+    
+    .card-shadow {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-create-group {
+        background-color: #007bff;
+        border: none;
+        font-weight: 600;
+        padding: 12px 24px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-create-group:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+    }
+    
+    .group-item {
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .group-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .delete-btn {
+        color: #dc3545;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+    
+    .delete-btn:hover {
+        color: #c82333;
+        transform: scale(1.1);
+    }
+    
+    .input-field {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    
+    .input-field:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        outline: none;
+    }
+    
+    .participant-counter {
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 8px 16px;
+    }
+    
+    .counter-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #6c757d;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .counter-btn:hover {
+        color: #007bff;
+        transform: scale(1.1);
+    }
+    
+    .footer-section {
+        background-color: #6c757d;
+        color: white;
+        padding: 40px 0 20px;
+    }
+    
+    .calculator-icon {
+        color: #007bff;
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #343a40;
+        margin-left: 12px;
+    }
+</style>
+
+<script>
+    function incrementCounter() {
+        const input = document.querySelector('input[name="group[participant_count]"]');
+        input.value = parseInt(input.value) + 1;
+    }
+</script>
