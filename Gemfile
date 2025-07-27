@@ -17,6 +17,8 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "tailwindcss-rails", "~> 4.3.0"
 gem "puma"
+gem 'activerecord-session_store', "~> 2.2.0"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
