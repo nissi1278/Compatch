@@ -16,7 +16,11 @@
                 "dbaeumer.vscode-eslint",
                 "bradlc.vscode-tailwindcss",
                 "esbenp.prettier-vscode",
-                "ritwickdey.liveserver"
+                "ritwickdey.liveserver",
+                "kaiwood.endwise",
+                "jduponchelle.rainbow-end",
+                "kaiwood.endwise",
+                "oderwat.indent-rainbow"
             ]
         }
     },
