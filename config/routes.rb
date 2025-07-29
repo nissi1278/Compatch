@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "participants/create"
+  get "participants/destroy"
+  get "participants/update"
+  get "participants/show"
   root 'groups#index'
   resources :groups, only: [:index, :create, :show, :edit, :update, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
