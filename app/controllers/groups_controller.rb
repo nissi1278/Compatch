@@ -4,7 +4,11 @@ class GroupsController < ApplicationController
   end
 
   def create
-
+    if @group.save(group_create_params)
+      
+    else
+      
+    end
   end
 
   def show

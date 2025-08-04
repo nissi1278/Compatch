@@ -1,4 +1,15 @@
 <div class="container">
+    <% if @group.errors.any? %>
+        <div>
+            <h2 class=""><%= @group.errors.count %>件のエラーがあります。</h2>
+            <ul class="">
+                <%= @group.errors.full_message.each do |message| %>
+                    <li class=""><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
     <div class="white-card w-full flex flex-wrap justify-center mb-5">
         <div class="w-full lg:w-8/12 px-4">
             <div class="border-0 p-4">
@@ -12,7 +23,7 @@
                         <%= form.text_field :name, 
                             class: "input-field", 
                             placeholder: "グループ名を入力",
-                            value: "新入社員歓迎会" %>
+                            value: "" %>
                     </div> 
                     
                     <div class="mb-4">
