@@ -1,13 +1,7 @@
 class ParticipantsController < ApplicationController
-  def create
+  def calculate
   end
 
-  def destroy
-  end
-
-  def update
-  end
-
-  def show
+  def save_calculations
   end
 end

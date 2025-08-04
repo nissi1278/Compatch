@@ -1,20 +1,12 @@
 Rails.application.routes.draw do
-  get "participants/create"
-  get "participants/destroy"
-  get "participants/update"
-  get "participants/show"
   root 'groups#index'
-  resources :groups, only: [:index, :create, :show, :edit, :update, :destroy]
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :groups do
+    # ParticipantsController では adjust と update_adjustments のみを使用
+    resources :participants, only: [:create, :destroy] do
+      collection do
+        get 'calculate'            # /groups/:group_id/participants/calculate
+        patch 'save_calculations' # /groups/:group_id/participants/save_calculations
+      end
+    end
+  end
 end
