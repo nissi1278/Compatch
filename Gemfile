@@ -26,6 +26,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
+  gem "rubocop-rspec"
   gem "guard", "~> 2.19.1"
   gem "guard-rspec", "~> 4.7.3", require: false
   gem "guard-rubocop", "~> 1.5.0", require: false
