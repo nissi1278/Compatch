@@ -4,10 +4,11 @@ class GroupsController < ApplicationController
   end
 
   def create
-    if @group.save(group_create_params)
-      
+    @group = Group.new(group_create_params)
+    if @group.save
+      redirect_to calculate_group_participants(@group)
     else
-      
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -26,7 +27,8 @@ class GroupsController < ApplicationController
 
   private
     def group_create_params
-      params.expect(group: [:name, :participant_count])
+      # params.expect(group: [:name, :participant_count])
+      params.expect(group: [:name])
     end
 
     def group_show_params

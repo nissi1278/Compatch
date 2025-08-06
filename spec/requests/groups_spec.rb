@@ -45,25 +45,25 @@ RSpec.describe "Groups", type: :request do
       it "モデルが作成されること" do
         expect {
           post groups_path, params: valid_attributes
-        }.to change(Groups, :count).by(1)
+        }.to change(Group, :count).by(1)
       end
       it "正しい属性でモデルが作成されること" do
         post groups_path, params: valid_attributes
-        expect(Groups.last.name).to eq("2025 new year party")
+        expect(Group.last.name).to eq("2025 new year party")
       end
     end
 
     context "グループ作成時許可されていないパラメータが含まれる場合" do
       it "悪意のあるパラメータが保存されないこと" do
         post groups_path, params: invalid_attributes
-        expect(Groups.last).not_to respond_to(:malicious_param)
-        expect(Groups.last.attributes.keys).not_to include("malicious_param")
+        expect(Group.last).not_to respond_to(:malicious_param)
+        expect(Group.last.attributes.keys).not_to include("malicious_param")
       end
       it "モデルが作成されるが、悪意のあるパラメータは無視されること" do
         expect {
           post groups_path, params: invalid_attributes
-        }.to change(Groups, :count).by(1)
-        expect(Groups.last.name).to eq("2026 new year party")
+        }.to change(Group, :count).by(1)
+        expect(Group.last.name).to eq("2026 new year party")
       end
     end
   end
