@@ -5,8 +5,9 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_create_params)
+    @group.session_id = session.id
     if @group.save
-      redirect_to calculate_group_participants(@group)
+      redirect_to calculate_group_participants_path(@group)
     else
       render :index, status: :unprocessable_entity
     end
