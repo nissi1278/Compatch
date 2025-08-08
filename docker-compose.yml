@@ -16,7 +16,7 @@ services:
             - DB_PASSWORD=${MYSQL_USER_PASSWORD}
         networks:
             - dev_net
-        command: 'rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0'
+        command: 'tail -f /dev/null' # これを追加
         ports:
             - '3000:3000'
     db:
