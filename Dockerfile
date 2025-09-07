@@ -11,7 +11,8 @@ RUN apt-get update && \
   build-essential \
   git \
   bash \
-  default-libmysqlclient-dev && \
+  default-libmysqlclient-dev \
+  watchman && \
   gem install bundler && \
   rm -rf /var/lib/apt/lists/*
 

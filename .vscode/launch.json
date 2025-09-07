@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "rdbg",
+      "name": "AttachLocal",
+      "request": "attach",
+      "debugPort": "localhost:12345",
+      "localfsMap": "/workspace:${workspaceFolder}"
+    }
+  ]
+}
