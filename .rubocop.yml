@@ -17,22 +17,28 @@ Style/FrozenStringLiteralComment:
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
-Style/WordArray: 
+Style/WordArray:
   EnforcedStyle: percent
-Style/HashSyntax: 
+Style/HashSyntax:
   EnforcedStyle: ruby19
 
 # Layout
 Layout/LineLength:
   Enabled: true
   Max: 120
+Layout/IndentationStyle:
+  EnforcedStyle: space
+Layout/Tab:
+  Enabled: true
+Layout/IndentationWidth:
+  Width: 2
 
 # Rails
 Rails/ApplicationRecord:
   Enabled: true
 Rails/CreateTableWithTimestamps:
   Enabled: true
-Rails/FindById: 
+Rails/FindById:
   Enabled: true
 Rails/NotNullColumn:
   Enabled: true
