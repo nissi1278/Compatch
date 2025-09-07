@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="white-card border-0 p-4">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="p-2 bg-blue-100 rounded-lg">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="4" y="3" width="16" height="18" rx="2" ry="2"/>
+                    <line x1="8" y1="7" x2="16" y2="7"/>
+                    <line x1="8" y1="11" x2="16" y2="11"/>
+                    <line x1="8" y1="15" x2="12" y2="15"/>
+                </svg>
+            </div>
+            <h2 class="section-title">合計金額</h2>
+        </div>
+        <div class="calculation-section">
+            <h3>合計金額の入力</h3>
+            <%= form_with(model: @group, url: calculate_group_path(@group), method: :patch, data: { turbo_stream: true, controller: "auto-submit" }) do |form| %>
+                <div class="mb-4">
+                    <%= form.number_field :total_amount, 
+                                            value: @group.total_amount,
+                                            placeholder: "合計金額を入力してください。",
+                                            class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2",
+                                            data: { action: "input->auto-submit#submit" }
+                    %>
+                </div>
+                <%= form.submit "計算する", class: "hidden" %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="white-card border-0 p-4">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-100 rounded-lg">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="4" y="3" width="16" height="18" rx="2" ry="2"/>
+                        <line x1="8" y1="7" x2="16" y2="7"/>
+                        <line x1="8" y1="11" x2="16" y2="11"/>
+                        <line x1="8" y1="15" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                <h2 class="section-title">参加者支払い金額</h2>
+            </div>
+            <button class="btn btn-primary">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                結果共有リンクをコピー
+            </button>
+        </div>
+        <div id="calculation-results">
+            <%= render partial: "groups/calculation_results", locals: {
+                per_person_amount: @per_person_amount,
+                grouped_amounts: @grouped_amounts,
+                num_participants: @participants&.count,
+                total_amount: @group.total_amount || 0,
+                remainder_amount: @remainder_amount,
+                error_message: nil
+            } %>
+        </div>
+    </div>
+
+    <div class="white-card border-0 p-4">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-100 rounded-lg">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h2 class="section-title">参加者管理</h2>
+            </div>
+            <button class="btn btn-primary">
+                均等割リセット
+            </button>
+        </div>
+        <%= turbo_frame_tag "participant-list" do %>
+            <%= render @participants %>
+        <% end %>
+        <div class="space-y-4">
+            <%= form_with(model: [@group, @participant], local: false, id: "add_participant_form", data: { turbo_stream: true }) do |form| %>
+                <%= form.button :submit, class: "btn btn-primary w-full mt-6" do %>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <line x1="19" y1="8" x2="19" y2="14"/>
+                    <line x1="22" y1="11" x2="16" y2="11"/>
+                    </svg>
+                    + ユーザを追加
+                <% end %>
+            <% end %>
+    </div>
+</div>
