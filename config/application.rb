@@ -18,6 +18,8 @@ module Workspace
     config.generators do |g|
       g.test_framework :rspec # ここを追加
     end
+
+    config.autoload_paths += Dir[Rails.root.join('app', '**', 'concerns')]
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
