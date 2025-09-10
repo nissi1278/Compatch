@@ -12,6 +12,7 @@ RUN apt-get update && \
   git \
   bash \
   default-libmysqlclient-dev \
+  vim  \
   watchman && \
   gem install bundler && \
   rm -rf /var/lib/apt/lists/*
