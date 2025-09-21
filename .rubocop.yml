@@ -1,16 +1,21 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
-
-require:
+pluguins:
   - rubocop-rails
+  - rubocop-performance
   - rubocop-rspec
 
-# Lint
-Lint/UnusedMethodArgument:
-  Enabled: true
-Lint/UselessAssignment:
-  Enabled: true
-
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.4
+  TargetRailsVersion: 8.0
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'log/**/*'
+    - 'spec/fixtures/**/*'
 # style
 Style/FrozenStringLiteralComment:
   Enabled: true
@@ -28,8 +33,6 @@ Layout/LineLength:
   Max: 120
 Layout/IndentationStyle:
   EnforcedStyle: space
-Layout/Tab:
-  Enabled: true
 Layout/IndentationWidth:
   Width: 2
 
@@ -52,7 +55,11 @@ Rails/TimeZone:
   Enabled: true
 Rails/Validation:
   Enabled: true
-RSpec/FilePath:
+
+# Rspec
+RSpec/SpecFilePathFormat:
+  Enabled: true
+RSpec/SpecFilePathSuffix:
   Enabled: true
 RSpec/Its:
   Enabled: true
