@@ -1,4 +1,4 @@
-pluguins:
+plugins:
   - rubocop-rails
   - rubocop-performance
   - rubocop-rspec
@@ -32,34 +32,12 @@ Layout/LineLength:
   Enabled: true
   Max: 120
 Layout/IndentationStyle:
-  EnforcedStyle: space
+  EnforcedStyle: spaces
 Layout/IndentationWidth:
   Width: 2
-
-# Rails
-Rails/ApplicationRecord:
-  Enabled: true
-Rails/CreateTableWithTimestamps:
-  Enabled: true
-Rails/FindById:
-  Enabled: true
-Rails/NotNullColumn:
-  Enabled: true
-Rails/OutputSafety:
-  Enabled: true
-Rails/Presence:
-  Enabled: true
-Rails/Squish:
-  Enabled: true
-Rails/TimeZone:
-  Enabled: true
-Rails/Validation:
-  Enabled: true
 
 # Rspec
 RSpec/SpecFilePathFormat:
   Enabled: true
 RSpec/SpecFilePathSuffix:
-  Enabled: true
-RSpec/Its:
   Enabled: true
