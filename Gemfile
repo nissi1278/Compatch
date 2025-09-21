@@ -29,7 +29,7 @@ group :development, :test do
   gem "guard", "~> 2.19.1"
   gem "guard-rspec", "~> 4.7.3", require: false
   gem "guard-rubocop", "~> 1.5.0", require: false
-  gem "rspec-rails", "~> 8.0.1"
+  gem "rspec-rails", "~> 8.0.2"
   gem "dotenv-rails", "~> 3.1.8"
   gem "pry-byebug", "~> 3.11.0"
   gem "brakeman", require: false
