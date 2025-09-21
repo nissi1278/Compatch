@@ -506,10 +506,10 @@ DEPENDENCIES
   pry-byebug (~> 3.11.0)
   puma
   rails (~> 8.0.2)
-  rubocop
-  rubocop-performance
-  rubocop-rails
   rspec-rails (~> 8.0.2)
+  rubocop (~> 1.78.0)
+  rubocop-performance (~> 1.25.0)
+  rubocop-rails (~> 2.32.0)
   rubocop-rspec (~> 3.6.0)
   selenium-webdriver
   solargraph (~> 0.56.0)
