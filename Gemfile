@@ -18,15 +18,17 @@ gem "thruster", require: false
 gem "tailwindcss-rails", "~> 4.3.0"
 gem "puma"
 gem 'activerecord-session_store', "~> 2.2.0"
-
+gem "jsbundling-rails", "~> 1.3.0"
+gem "cssbundling-rails", "~> 1.4.0"
+gem "brakeman", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
-  gem "rubocop-rspec"
+  gem "rubocop-rspec", "~>3.6.0"
+  gem "htmlbeautifier", "~>1.4.3"
   gem "guard", "~> 2.19.1"
   gem "guard-rspec", "~> 4.7.3", require: false
   gem "guard-rubocop", "~> 1.5.0", require: false
@@ -37,6 +39,7 @@ end
 
 group :development do
   gem "web-console"
+  gem "spring"
   gem "solargraph", "~> 0.56.0", require: false
   gem "solargraph-rails", "~> 1.2.0", require: false
   gem "solargraph-rspec", "~> 0.5.2", require: false

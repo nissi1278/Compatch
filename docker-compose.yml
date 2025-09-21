@@ -1,41 +1,40 @@
 services:
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        container_name: compatch-dev
-        volumes:
-            - type: bind
-              source: '.'
-              target: '/workspace'
-        depends_on:
-            - db
-        environment:
-            - DB_HOST=db
-            - DB_USER=${MYSQL_USER_NAME}
-            - DB_PASSWORD=${MYSQL_USER_PASSWORD}
-        networks:
-            - dev_net
-        command: 'tail -f /dev/null' # これを追加
-        ports:
-            - '3000:3000'
-    db:
-        image: mysql:8.4.4
-        container_name: compatch-db
-        ports:
-            - '3308:3306'
-        restart: always
-        volumes:
-            - db-data:/var/lib/mysql # データをボリュームに永久保存
-        environment:
-            # .envにパスワードは記載
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: Compatch
-            MYSQL_USER: ${MYSQL_USER_NAME}
-            MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
-        networks:
-            - dev_net
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: compatch-dev
+    volumes:
+      - type: bind
+        source: "."
+        target: "/workspace"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE= ${MYSQL_DATABASE}
+    networks:
+      - dev_net
+    command: "bash -c 'rm -f tmp/pids/server.pid && bundle exec rdbg -n --open --host 0.0.0.0 --port 12345 -c -- bin/rails server -b 0.0.0.0'"
+    ports:
+      - "3000:3000"
+      - "12345:12345"
+  db:
+    image: mysql:8.4.4
+    container_name: compatch-db
+    ports:
+      - "3308:3306"
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql # データをボリュームに永久保存
+    environment:
+      # .envにパスワードは記載
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    networks:
+      - dev_net
 volumes:
-    db-data:
+  db-data:
 networks:
-    dev_net:
+  dev_net:
