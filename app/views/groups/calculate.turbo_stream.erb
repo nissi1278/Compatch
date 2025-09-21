@@ -1,0 +1,3 @@
+<%= turbo_stream.update "calculation-results" do %>
+    <%= render partial: "groups/calculation_results", locals: { per_person_amount: @per_person_amount, error_message: @error_message } %>
+<% end %>

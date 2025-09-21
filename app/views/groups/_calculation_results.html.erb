@@ -1,0 +1,48 @@
+<div class="mt-4 p-4 bg-white rounded-lg shadow-sm">
+    <% if per_person_amount %>
+        <h4 class="text-xl font-bold text-green-800 text-center mb-4">
+        一人あたりの基本金額: <%= number_to_currency(per_person_amount, precision: 0, unit: "¥") %>
+        </h4>
+
+        <div class="space-y-4">
+            <div class="flex justify-between items-center text-gray-600 text-sm border-b pb-2">
+                <span>参加者</span>
+                <span>支払い金額</span>
+            </div>
+            <% grouped_amounts.each do |amount, participants_for_amount| %>
+                <div class="flex justify-between items-center py-2 <%= 'border-b border-gray-200' unless amount == grouped_amounts.keys.last %>">
+                <div>
+                    <% if participants_for_amount.count == 1 %>
+                    <span class="font-medium"><%= participants_for_amount.first.name %></span>
+                    <% else %>
+                    <div class="font-medium">その他のユーザー</div>
+                    <div class="text-sm text-gray-500">
+                        <%= participants_for_amount.map(&:name).join('・') %>
+                    </div>
+                    <% end %>
+                </div>
+                <span class="font-bold">
+                    <%= number_to_currency(amount, precision: 0, unit: "¥") %>
+                </span>
+                </div>
+            <% end %>
+        </div>
+
+        <div class="bg-gray-50 rounded-lg p-4 mt-6">
+            <div class="flex justify-between text-sm">
+                <span>参加人数</span>
+                <span>合計金額</span>
+                <span>端数</span>
+            </div>
+            <div class="flex justify-between font-bold text-lg mt-1">
+                <span><%= num_participants %>人</span>
+                <span><%= number_to_currency(total_amount, precision: 0, unit: "¥") %></span>
+                <span><%= number_to_currency(remainder_amount, precision: 0, unit: "¥") %></span>
+            </div>
+        </div>
+    <% elsif error_message %>
+        <p class="text-red-600 text-center"><%= error_message %></p>
+    <% else %>
+        <p class="text-gray-600 text-center">合計金額を入力して割り勘を計算しましょう。</p>
+    <% end %>
+</div>
