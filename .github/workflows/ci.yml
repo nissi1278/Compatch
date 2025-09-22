@@ -81,7 +81,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://127.0.0.1:3306
+          DB_HOST: mysql
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
