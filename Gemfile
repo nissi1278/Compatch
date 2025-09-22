@@ -34,7 +34,7 @@ group :development, :test do
   gem "pry-byebug", "~> 3.11.0"
   gem "brakeman", require: false
   gem "rubocop", "~>1.78.0"
-  gem "rubocop-performance","~>1.25.0"
+  gem "rubocop-performance","~>1.26.0"
   gem "rubocop-rails","~>2.32.0"
   gem "rubocop-rspec", "~>3.6.0"
 end
