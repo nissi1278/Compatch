@@ -18,7 +18,7 @@ development:
   database: Compatch_dev
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: <%= ENV["MYSQL_ROOT_PASSWORD"] %>
+  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") { "" } %>
   host: <%= ENV.fetch("DB_HOST") { "db" } %>
 
   # Warning: The database defined as "test" will be erased and
@@ -28,8 +28,8 @@ test:
   <<: *default
   database: Compatch_test
   username: root
-  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") { "" } %>
-  host: <%= ENV.fetch("DB_HOST") { "mysql" } %>
+  password: root
+  host: <%= ENV.fetch("DB_HOST") { "db" } %>
 
 production:
   primary: &primary_production
