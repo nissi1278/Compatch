@@ -3,7 +3,8 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: 
+      - main
 
 jobs:
   scan_ruby:
@@ -58,16 +59,20 @@ jobs:
 
     services:
       mysql:
-        image: mysql
+        image: mysql:8.0
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: root
+        options: >-
+          --health-cmd="mysqladmin ping -hmysql -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential default-libmysqlclient-dev git libyaml-dev pkg-config google-chrome-stable
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential default-libmysqlclient-dev git libyaml-dev pkg-config
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -78,11 +83,19 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Setup DB
+        run: bin/rails db:prepare
+        env:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://127.0.0.1:3306
-        run: bin/rails db:test:prepare test test:system
+          DB_HOST: 127.0.0.1
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: bin/rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
