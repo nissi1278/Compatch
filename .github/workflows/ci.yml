@@ -60,12 +60,16 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
+        options: >-
+          --health-cmd="mysqladmin ping -hmysql -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Install packages
@@ -80,28 +84,19 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Wait for MySQL
-        run: |
-          until mysqladmin ping -h"$DB_HOST" -uroot --silent; do
-            echo "Waiting for MySQL..."
-            sleep 2
-          done
-        env:
-          DB_HOST: mysql
-
       - name: Setup DB
         run: bin/rails db:prepare
         env:
           RAILS_ENV: test
-          DB_HOST: mysql
+          DB_HOST: 127.0.0.1
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Run tests
         env:
           RAILS_ENV: test
-          DB_HOST: mysql
+          DB_HOST: 127.0.0.1
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: bin/rails db:prepare
+        run: bin/rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
