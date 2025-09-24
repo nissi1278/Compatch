@@ -48,8 +48,8 @@ class GroupsController < ApplicationController
       format.turbo_stream do
         # calculation-results 部分だけを更新
         render turbo_stream: turbo_stream.replace(
-          "calculation-results",
-          partial: "groups/calculation_results",
+          'calculation-results',
+          partial: 'groups/calculation_results',
           locals: {
             per_person_amount: @per_person_amount,
             grouped_amounts: @grouped_amounts,

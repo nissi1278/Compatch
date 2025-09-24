@@ -46,12 +46,12 @@ class ParticipantsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             dom_id(@participant),
-            partial: "participants/participant",
+            partial: 'participants/participant',
             locals: { participant: @participant, per_person_amount: @per_person_amount }
           ) +
           turbo_stream.update(
-            "calculation-results",
-            partial: "groups/calculation_results",
+            'calculation-results',
+            partial: 'groups/calculation_results',
             locals: {
               per_person_amount: @per_person_amount,
               grouped_amounts: @grouped_amounts,
