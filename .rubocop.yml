@@ -7,6 +7,10 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.4
   TargetRailsVersion: 8.0
+  Include:
+    - '**/*.rb'
+    - 'Gemfile'
+    - 'Rakefile'
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
@@ -16,12 +20,19 @@ AllCops:
     - 'tmp/**/*'
     - 'log/**/*'
     - 'spec/fixtures/**/*'
+
 # style
 Style/FrozenStringLiteralComment:
   Enabled: true
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
 Style/WordArray:
   EnforcedStyle: percent
 Style/HashSyntax:
@@ -31,10 +42,21 @@ Style/HashSyntax:
 Layout/LineLength:
   Enabled: true
   Max: 120
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
 Layout/IndentationStyle:
   EnforcedStyle: spaces
 Layout/IndentationWidth:
   Width: 2
+Layout/TrailingWhitespace:
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
+# budler
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
 
 # Rspec
 RSpec/SpecFilePathFormat:
