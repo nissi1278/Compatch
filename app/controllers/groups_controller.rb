@@ -67,21 +67,21 @@ class GroupsController < ApplicationController
   end
 
   private
-    def group_params
-      params.expect(group: [:total_amount])
-    end
+  def group_params
+    params.expect(group: [:total_amount])
+  end
 
-    def group_create_params
-      # params.expect(group: [:name, :participant_count])
-      params.expect(group: [:name])
-    end
+  def group_create_params
+    # params.expect(group: [:name, :participant_count])
+    params.expect(group: [:name])
+  end
 
-    def group_show_params
-      params.expect(group: [:id])
-    end
+  def group_show_params
+    params.expect(group: [:id])
+  end
 
-    def set_group
-      @group = Group.find(params[:id])
-    end
+  def set_group
+    @group = Group.find(params[:id])
+  end
 
 end

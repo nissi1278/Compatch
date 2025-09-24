@@ -2,8 +2,9 @@ module BillSplitter
   extend ActiveSupport::Concern
   # 入力された合計金額と参加者すべてを受け取り、金額を分割する処理。
   def self.calculate_split_bill(total_amount_input, all_participants)
-    return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} } 
     if all_participants.empty? || total_amount_input.nil?
+      return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} }
+    end
 
     fixed_participants = all_participants.select(&:is_manual_fixed)
     unfixed_participants = all_participants.reject(&:is_manual_fixed)
@@ -38,12 +39,12 @@ module BillSplitter
     }
   end
 
-  private
-    # 手動で固定された金額を支払う参加者の合計金額を計算する
-    def self.calculate_fixed_total_sum(participants)
-      fixed_participants = participants.select(&:is_manual_fixed)
-      fixed_participants.sum { |p| p.payment_amount || 0 }
-    end
+private
+  # 手動で固定された金額を支払う参加者の合計金額を計算する
+  def self.calculate_fixed_total_sum(participants)
+    fixed_participants = participants.select(&:is_manual_fixed)
+    fixed_participants.sum { |p| p.payment_amount || 0 }
+  end
 
   # 各参加者の最終的な支払い金額を決定し、端数を分配する
   def self.assign_and_distribute_amounts(all_participants, base_amount, unfixed_participants, remainder_count)
@@ -51,16 +52,15 @@ module BillSplitter
     amounts_data = all_participants.map do |p|
       final_amount = p.is_manual_fixed ? p.payment_amount : base_amount
       { participant: p, amount: final_amount }
+      # 次に、端数を分配する
+      # if remainder_count > 0
+      #   unfixed_participants.first(remainder_count).each do |p|
+      #     item_index = amounts_data.index { |item| item[:participant] == p }
+      #     amounts_data[item_index][:amount] += 1
+      #   end
+      # end
+      amounts_data
     end
-
-    # 次に、端数を分配する
-    # if remainder_count > 0
-    #   unfixed_participants.first(remainder_count).each do |p|
-    #     item_index = amounts_data.index { |item| item[:participant] == p }
-    #     amounts_data[item_index][:amount] += 1
-    #   end
-    # end
-    amounts_data
   end
 
   # 最終的な支払い金額に基づいて参加者をグループ化
@@ -71,7 +71,7 @@ module BillSplitter
                 .to_h
   end
 
-  # 最終的な端数を算出
   def self.calculate_remainder(total_amount, calculated_total_amount)
+    # 最終的な端数を算出
   end
 end
