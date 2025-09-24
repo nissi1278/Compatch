@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   before_action :set_group
-  before_action :set_participant, only: [:update, :destroy]
+  before_action :set_participant, only: %i[update destroy]
 
   def create
     @participant = @group.participants.new(name: '参加者')
@@ -9,19 +9,6 @@ class ParticipantsController < ApplicationController
       if @participant.save
         format.turbo_stream
         format.html { redirect_to calculate_group_path(@group), notice: '参加者を追加しました。' }
-      else
-      end
-    end
-  end
-
-  def destroy
-    @participant = @group.participants.find(params[:id])
-
-    respond_to do |format|
-      if @participant.destroy
-        format.turbo_stream
-        format.html { redirect_to calculate_group_path(@group), notice: '参加者を削除しました。' }
-      else
       end
     end
   end
@@ -49,18 +36,18 @@ class ParticipantsController < ApplicationController
             partial: 'participants/participant',
             locals: { participant: @participant, per_person_amount: @per_person_amount }
           ) +
-          turbo_stream.update(
-            'calculation-results',
-            partial: 'groups/calculation_results',
-            locals: {
-              per_person_amount: @per_person_amount,
-              grouped_amounts: @grouped_amounts,
-              num_participants: all_participants.count,
-              total_amount: total_amount_input,
-              remainder_amount: @remainder_amount,
-              error_message: nil
-            }
-          )
+                               turbo_stream.update(
+                                 'calculation-results',
+                                 partial: 'groups/calculation_results',
+                                 locals: {
+                                   per_person_amount: @per_person_amount,
+                                   grouped_amounts: @grouped_amounts,
+                                   num_participants: all_participants.count,
+                                   total_amount: total_amount_input,
+                                   remainder_amount: @remainder_amount,
+                                   error_message: nil
+                                 }
+                               )
         end
         format.html { redirect_to calculate_group_path(@group), notice: '参加者の金額を調整しました。' }
       end
@@ -72,7 +59,19 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def destroy
+    @participant = @group.participants.find(params[:id])
+
+    respond_to do |format|
+      if @participant.destroy
+        format.turbo_stream
+        format.html { redirect_to calculate_group_path(@group), notice: '参加者を削除しました。' }
+      end
+    end
+  end
+
   private
+
   def set_group
     @group = Group.find(params[:group_id])
   end

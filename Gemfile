@@ -8,7 +8,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 gem "bcrypt", "~> 3.1.7"
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
@@ -24,7 +24,7 @@ gem "cssbundling-rails", "~> 1.4.0"
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "htmlbeautifier", "~>1.4.3"
   gem "guard", "~> 2.19.1"
   gem "guard-rspec", "~> 4.7.3", require: false
@@ -34,8 +34,8 @@ group :development, :test do
   gem "pry-byebug", "~> 3.11.0"
   gem "brakeman", require: false
   gem "rubocop", "~>1.78.0"
-  gem "rubocop-performance","~>1.25.0"
-  gem "rubocop-rails","~>2.32.0"
+  gem "rubocop-performance", "~>1.25.0"
+  gem "rubocop-rails", "~>2.32.0"
   gem "rubocop-rspec", "~>3.6.0"
 end
 

@@ -35,11 +35,10 @@ module BillSplitter
     {
       per_person_base_amount: per_person_base_amount_for_unfixed,
       remainder_amount: final_remainder,
-      grouped_amounts: grouped_amounts,
+      grouped_amounts: grouped_amounts
     }
   end
 
-private
   # 手動で固定された金額を支払う参加者の合計金額を計算する
   def self.calculate_fixed_total_sum(participants)
     fixed_participants = participants.select(&:is_manual_fixed)
@@ -47,7 +46,7 @@ private
   end
 
   # 各参加者の最終的な支払い金額を決定し、端数を分配する
-  def self.assign_and_distribute_amounts(all_participants, base_amount, unfixed_participants, remainder_count)
+  def self.assign_and_distribute_amounts(all_participants, base_amount, _unfixed_participants, _remainder_count)
     # まず、基本金額を割り当てる
     amounts_data = all_participants.map do |p|
       final_amount = p.is_manual_fixed ? p.payment_amount : base_amount
