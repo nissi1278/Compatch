@@ -2,7 +2,8 @@ module BillSplitter
   extend ActiveSupport::Concern
   # 入力された合計金額と参加者すべてを受け取り、金額を分割する処理。
   def self.calculate_split_bill(total_amount_input, all_participants)
-    return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} } if all_participants.empty? || total_amount_input.nil?
+    return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} } 
+    if all_participants.empty? || total_amount_input.nil?
 
     fixed_participants = all_participants.select(&:is_manual_fixed)
     unfixed_participants = all_participants.reject(&:is_manual_fixed)
