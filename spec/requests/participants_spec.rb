@@ -1,30 +1,30 @@
 require 'rails_helper'
 
-RSpec.describe "Participants", type: :request do
-  describe "GET /create" do
-    it "returns http success" do
-      get "/participants/create"
+RSpec.describe 'Participants', type: :request do
+  describe 'GET /create' do
+    it 'returns http success' do
+      get '/participants/create'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /destroy" do
-    it "returns http success" do
-      get "/participants/destroy"
+  describe 'GET /destroy' do
+    it 'returns http success' do
+      get '/participants/destroy'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /update" do
-    it "returns http success" do
-      get "/participants/update"
+  describe 'GET /update' do
+    it 'returns http success' do
+      get '/participants/update'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /show" do
-    it "returns http success" do
-      get "/participants/show"
+  describe 'GET /show' do
+    it 'returns http success' do
+      get '/participants/show'
       expect(response).to have_http_status(:success)
     end
   end
