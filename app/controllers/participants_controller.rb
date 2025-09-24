@@ -73,15 +73,15 @@ class ParticipantsController < ApplicationController
   end
 
   private
-    def set_group
-      @group = Group.find(params[:group_id])
-    end
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
 
-    def set_participant
-      @participant = @group.participants.find(params[:id])
-    end
+  def set_participant
+    @participant = @group.participants.find(params[:id])
+  end
 
-    def participant_params
-      params.require(:participant).permit(:name, :is_manual_fixed, :payment_amount)
-    end
+  def participant_params
+    params.require(:participant).permit(:name, :is_manual_fixed, :payment_amount)
+  end
 end
