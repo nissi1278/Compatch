@@ -35,7 +35,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "rubocop", "~>1.78.0"
   gem "rubocop-performance", "~>1.25.0"
-  gem "rubocop-rails", "~>2.32.0"
+  gem "rubocop-rails", "~>2.33.3"
   gem "rubocop-rspec", "~>3.6.0"
 end
 
