@@ -63,3 +63,25 @@ RSpec/SpecFilePathFormat:
   Enabled: true
 RSpec/SpecFilePathSuffix:
   Enabled: true
+
+# Rails
+Rails/SkipsModelValidations:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: true
+
+Rails/OutputSafety:
+  Enabled: true
+
+Rails/TimeZone:
+  Enabled: true
+
+Rails/Date:
+  Enabled: true
+
+Rails/InverseOf:
+  Enabled: true
+
+Rails/EnumHash:
+  Enabled: true
