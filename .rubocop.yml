@@ -82,3 +82,6 @@ Rails/InverseOf:
 
 Rails/EnumHash:
   Enabled: true
+
+Rails/I18nLocaleTexts:
+  Enabled: false
