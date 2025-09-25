@@ -82,6 +82,6 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.require(:participant).permit(:name, :is_manual_fixed, :payment_amount)
+    params.expect(participant: [:name, :is_manual_fixed, :payment_amount])
   end
 end
