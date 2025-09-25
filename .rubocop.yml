@@ -34,6 +34,8 @@ Style/WordArray:
   EnforcedStyle: percent
 Style/HashSyntax:
   EnforcedStyle: ruby19
+Style/Documentation:
+  Enabled: false
 
 # Layout
 Layout/LineLength:

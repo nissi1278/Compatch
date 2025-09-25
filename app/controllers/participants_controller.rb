@@ -81,6 +81,6 @@ class ParticipantsController < ApplicationController
   end
 
   def participant_params
-    params.expect(participant: [:name, :is_manual_fixed, :payment_amount])
+    params.expect(participant: %i[name, is_manual_fixed, payment_amount])
   end
 end

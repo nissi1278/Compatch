@@ -15,7 +15,7 @@ module BillSplitter
     per_person_base_amount_for_unfixed = 0
     remainder_from_unfixed_split = 0
 
-    if unfixed_participants.count > 0
+    if unfixed_participants.any?
       per_person_base_amount_for_unfixed = remaining_amount_for_unfixed / unfixed_participants.count
       remainder_from_unfixed_split = remaining_amount_for_unfixed % unfixed_participants.count
     end
