@@ -1,7 +1,6 @@
 class BillSplitterService
   def initialize(total_amount, all_participants, floor_digits: 3)
     @total_amount = total_amount
-    
     @fixed_participants, @unfixed_participants = all_participants.partition(&:is_manual_fixed)
     @floor_digits = floor_digits
   end
@@ -12,7 +11,7 @@ class BillSplitterService
       return {per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} }
     end
 
-    amount_floor_value, truncated_value = split_amount_by_digits(remaining_amount_for_unfixed, floor_digits)
+    amount_floor_value, truncated_value = split_amount_by_digits()
     fixed_total_sum_paid = calculate_fixed_total_sum(fixed_participants)
     
     per_person_base_amount_for_unfixed = 0
@@ -35,10 +34,10 @@ class BillSplitterService
     
   class << self
     # 指定された桁数で金額を切り捨てし、切り捨て後の値と切り捨てた値を計算する
-    def split_amount_by_digits(amount, floor_digits)
-      digits = 10 ** floor_digits
-      truncated_value = amount % digits
-      floor_value = amount - truncated_value
+    def split_amount_by_digits
+      digits = 10 ** @floor_digits
+      truncated_value = @total_amount % digits
+      floor_value = @total_amount - truncated_value
       [floor_value, truncated_value]
     end
     
