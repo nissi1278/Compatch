@@ -31,7 +31,8 @@ class GroupsController < ApplicationController
     @participants = @group.participants.order(created_at: :asc)
     total_amount_input = @group.total_amount || 0
 
-    calculated_data = BillSplitter.calculate_split_bill(total_amount_input, @participants)
+    calculated_data = BillSplitter.new(total_amount_input, @participants).call
+
     @per_person_amount = calculated_data[:per_person_base_amount]
     @remainder_amount = calculated_data[:remainder_amount]
     @grouped_amounts = calculated_data[:grouped_amounts]
