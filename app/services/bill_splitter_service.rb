@@ -8,7 +8,7 @@ class BillSplitterService
 
   # 入力された合計金額と参加者すべてを受け取り、金額を分割する処理。
   def call
-    return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} } if calculation_unnecessary?
+    return default_result if calculation_unnecessary?
 
     unfixed_base_amount = calculate_base_amount
     build_amount_result(unfixed_base_amount)
@@ -21,9 +21,21 @@ class BillSplitterService
     @all_participants.empty? || @total_amount.zero?
   end
 
+  # 引数エラー時の戻り値を作成
+  def default_result
+    {
+      payment_rows: [],
+      summary: {
+        total_amount: @total_amount,
+        total_paid: 0,
+        remainder: @total_amount
+      }
+    }
+  end
+
   # 指定された桁数で金額を切り捨てし、切り捨て後の値と切り捨てた値を計算する
   def split_amount_by_digits
-    digits = 10 ** @floor_digits
+    digits = 10**@floor_digits
     truncated_value = @total_amount % digits
     floor_value = @total_amount - truncated_value
     [floor_value, truncated_value]
@@ -61,18 +73,38 @@ class BillSplitterService
     end
   end
 
+  # 計算結果を金額ごとし、表示用の行データを作成して返す
+  def create_grouped_payments(payment_list)
+    grouped_list = payment_list.group_by { |item| item[:amount] }
+
+    # グループ化したハッシュをviewに渡すための配列形式に変換
+    rows = grouped_list.map do |amount, items|
+      {
+        amount: amount,
+        participants: items.map { |item| item[:participant] }
+      }
+    end
+    rows.sort_by { |row| row[:amount] }
+  end
+
+  # サマリー部分を作成するメソッド
+  def calculate_summary(payment_list)
+    total_paid = payment_list.sum { |item| item[:amount] }
+    final_remainder = @total_amount - total_paid
+    {
+      total_amount: @total_amount,
+      total_paid: total_paid,
+      remainder: final_remainder
+    }
+  end
+
   # 最終的な計算結果を配列のハッシュ形式で返す
   def build_amount_result(unfixed_base_amount)
     payment_list = build_payment_list(unfixed_base_amount)
 
-    # リストから合計支払い金額を算出
-    total_paid = payment_list.sum { |item| item[:amount] }
-    final_remainder = @total_amount - total_paid
-
     {
-      fixed_participants: @fixed_participants,
-      base_amount_for_unfixed: unfixed_base_amount,
-      remainder: final_remainder
+      grouped_payments: create_grouped_payments(payment_list),
+      summery: calculate_summary(payment_list)
     }
   end
 end
