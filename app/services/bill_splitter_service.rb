@@ -8,19 +8,18 @@ class BillSplitterService
 
   # 入力された合計金額と参加者すべてを受け取り、金額を分割する処理。
   def call
-    if @all_participants.empty? || @total_amount.zero?
-      return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} }
-    end
+    return { per_person_base_amount: 0, remainder_amount: 0, grouped_amounts: {} } if calculation_unnecessary?
 
-    base_amount, unfixed_truncated_value = calculate_unfixed_split(amount_to_split)
-    {
-      fixed_participants: @fixed_participants,
-      base_amount_for_unfixed: base_amount,
-      final_remainder: (truncated_value + unfixed_truncated_value)
-    }
+    unfixed_base_amount = calculate_base_amount
+    build_amount_result(unfixed_base_amount)
   end
 
   private
+
+  # 計算が不要かチェック
+  def calculation_unnecessary?
+    @all_participants.empty? || @total_amount.zero?
+  end
 
   # 指定された桁数で金額を切り捨てし、切り捨て後の値と切り捨てた値を計算する
   def split_amount_by_digits
@@ -40,7 +39,8 @@ class BillSplitterService
     amount_floor_value, = split_amount_by_digits
     fixed_total_sum_paid = fixed_payments_total
     amount_to_split = amount_floor_value - fixed_total_sum_paid
-    # divmodの商(未固定者の割り勘金額)を
+
+    # .firstでdivmodの商（一人あたりの金額）のみ取得
     calculate_unfixed_split(amount_to_split).first
   end
 
@@ -49,5 +49,30 @@ class BillSplitterService
     return [0, 0] if @unfixed_participants.none?
 
     amount.divmod(@unfixed_participants.count)
+  end
+
+  # 参加者オブジェクトと支払い金額をまとめたハッシュを配列形式で返す
+  def build_payment_list(unfixed_base_amount)
+    @all_participants.map do |participant|
+      {
+        participant: participant,
+        amount: participant.is_manual_fixed ? participant.payment_amount : unfixed_base_amount
+      }
+    end
+  end
+
+  # 最終的な計算結果を配列のハッシュ形式で返す
+  def build_amount_result(unfixed_base_amount)
+    payment_list = build_payment_list(unfixed_base_amount)
+
+    # リストから合計支払い金額を算出
+    total_paid = payment_list.sum { |item| item[:amount] }
+    final_remainder = @total_amount - total_paid
+
+    {
+      fixed_participants: @fixed_participants,
+      base_amount_for_unfixed: unfixed_base_amount,
+      remainder: final_remainder
+    }
   end
 end
