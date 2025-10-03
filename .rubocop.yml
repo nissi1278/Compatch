@@ -52,6 +52,13 @@ Layout/TrailingWhitespace:
   Exclude:
     - 'Gemfile'
     - 'Rakefile'
+
+# Metrics
+Metrics/BlockLength: 
+  Enabled: false
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
 # budler
 Bundler/OrderedGems:
   Exclude:
