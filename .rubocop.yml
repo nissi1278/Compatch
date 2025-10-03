@@ -73,6 +73,8 @@ RSpec/MultipleExpectations:
   Max: 5
 RSpec/ExampleLength:
   Max: 15
+RSpec/NestedGroups:
+  Max: 5
 
 # Rails
 Rails/SkipsModelValidations:
