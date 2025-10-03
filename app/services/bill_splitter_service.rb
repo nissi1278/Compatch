@@ -103,7 +103,7 @@ class BillSplitterService
     payment_list = build_payment_list(unfixed_base_amount)
 
     {
-      grouped_payments: create_grouped_payments(payment_list),
+      payment_rows: create_grouped_payments(payment_list),
       summary: calculate_summary(payment_list)
     }
   end
