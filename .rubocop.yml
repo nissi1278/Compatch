@@ -75,6 +75,8 @@ RSpec/ExampleLength:
   Max: 15
 RSpec/NestedGroups:
   Max: 5
+RSpec/ContextWording:
+  Enabled: false
 
 # Rails
 Rails/SkipsModelValidations:
