@@ -69,6 +69,8 @@ RSpec/SpecFilePathFormat:
   Enabled: true
 RSpec/SpecFilePathSuffix:
   Enabled: true
+RSpec/MultipleExpectations:
+  Max: 5
 
 # Rails
 Rails/SkipsModelValidations:
