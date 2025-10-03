@@ -19,13 +19,7 @@ RSpec.describe BillSplitterService, type: :service do
     end
 
     context '正常な割り勘の場合' do
-      it '正しく計算され、表示用の行データとサマリーが返されること' do
-        # --- 期待される結果 ---
-        # 残額: 10000 - 5000 = 5000
-        # 割り勘額: 5000 / 2人 = 2500
-        # 支払い合計: 5000 + 2500 + 2500 = 10000
-        # 端数: 10000 - 10000 = 0
-
+      it '正しく計算され、表示用の行データが返されること' do
         # payment_rowsの検証
         expect(result[:payment_rows].count).to eq 2
         # 割り勘グループの検証
@@ -34,8 +28,14 @@ RSpec.describe BillSplitterService, type: :service do
         # 固定額グループの検証
         expect(result[:payment_rows][1][:amount]).to eq 5000
         expect(result[:payment_rows][1][:participants].map(&:name)).to contain_exactly('Aさん')
+      end
 
-        # summaryの検証
+      it '正しく計算され、表示用のサマリーが返されること' do
+        # --- 期待される結果 ---
+        # 残額: 10000 - 5000 = 5000
+        # 割り勘額: 5000 / 2人 = 2500
+        # 支払い合計: 5000 + 2500 + 2500 = 10000
+        # 端数: 10000 - 10000 = 0
         expect(result[:summary][:total_amount]).to eq 10_000
         expect(result[:summary][:total_paid]).to eq 10_000
         expect(result[:summary][:remainder]).to eq 0
@@ -70,7 +70,7 @@ RSpec.describe BillSplitterService, type: :service do
           Participant.new('Cさん', false, nil) # 割り勘 (5000になるはず)
         ]
       end
-      
+
       it '同じ金額の参加者が一つの行にまとめられること' do
         # --- 期待される結果 ---
         # A: 2500, B: 5000, C: 1250, D: 1250
