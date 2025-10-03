@@ -104,7 +104,7 @@ class BillSplitterService
 
     {
       grouped_payments: create_grouped_payments(payment_list),
-      summery: calculate_summary(payment_list)
+      summary: calculate_summary(payment_list)
     }
   end
 end
