@@ -88,12 +88,13 @@ class BillSplitterService
   end
 
   # サマリー部分を作成するメソッド
-  def calculate_summary(payment_list)
+  def calculate_summary(payment_list, unfixed_base_amount)
     total_paid = payment_list.sum { |item| item[:amount] }
     final_remainder = @total_amount - total_paid
     {
       total_amount: @total_amount,
       total_paid: total_paid,
+      unfixed_base_amount: unfixed_base_amount,
       remainder: final_remainder
     }
   end
@@ -104,7 +105,7 @@ class BillSplitterService
 
     {
       payment_rows: create_grouped_payments(payment_list),
-      summary: calculate_summary(payment_list)
+      summary: calculate_summary(payment_list, unfixed_base_amount)
     }
   end
 end
