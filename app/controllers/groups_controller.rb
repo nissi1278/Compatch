@@ -18,8 +18,11 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_create_params)
+    @group.participant_count = params[:group][:participant_count].to_i
     @group.session_id = session.id
+
     if @group.save
+      create_initial_participants
       redirect_to group_path(@group), notice: 'グループが作成されました。'
     else
       render :index, status: :unprocessable_entity
@@ -70,6 +73,14 @@ class GroupsController < ApplicationController
           locals: { result: result }
         )
       end
+    end
+  end
+
+  def create_initial_participants
+    return if @group.participant_count.zero?
+
+    @group.participant_count.times do |i|
+      @group.participants.create(name: "参加者 #{i + 1}")
     end
   end
 end
