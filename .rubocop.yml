@@ -55,9 +55,12 @@ Layout/TrailingWhitespace:
 
 # Metrics
 Metrics/BlockLength: 
-  Enabled: false
+  Enabled: true
   Exclude:
+    - 'config/routes.rb'
     - 'spec/**/*_spec.rb'
+Metrics/MethodLength:
+  Max: 15
 
 # budler
 Bundler/OrderedGems:
