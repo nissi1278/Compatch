@@ -1,0 +1,6 @@
+<%= form_with(model: [group, participant], class: "mt-4") do |f| %>
+    <div class="flex items-center space-x-2">
+        <%= f.text_field :name, class: "flex-grow block w-full border-gray-300 rounded-md shadow-sm p-2", placeholder: "新しい参加者名", required: true %>
+        <%= f.submit "追加", class: "btn btn-primary" %>
+    </div>
+<% end %>
