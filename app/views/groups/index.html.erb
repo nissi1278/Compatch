@@ -3,7 +3,7 @@
         <div>
             <h2 class=""><%= @group.errors.count %>件のエラーがあります。</h2>
             <ul class="">
-                <%= @group.errors.full_message.each do |message| %>
+                <%= @group.errors.full_messages.each do |message| %>
                     <li class=""><%= message %></li>
                 <% end %>
             </ul>
@@ -18,7 +18,7 @@
                     <h2 class="section-title mb-0">飲み会グループ作成</h2>
                 </div>
                 <p class="form-label text-gray-500 mb-4">飲み会のグループを作成しよう。</p>
-                <%= form_with model: @group, local: true, class: "group-form" do |form| %>
+                <%= form_with model: @group, class: "group-form" do |form| %>
                     <div class="mb-4">
                         <%= form.text_field :name, 
                             class: "input-field", 
@@ -30,10 +30,9 @@
                         <label class="form-label text-gray-500">参加人数を選択してね。</label>
                         <div class="participant-counter justify-between">
                             <%= form.number_field :participant_count, 
-                                value: 5, 
                                 min: 1,
                                 class: "input-field",
-                                style: "width: auto;" %>
+                                style: "width: auto;",
                             <button class="counter-btn" type="button" onclick="incrementCounter()">
                                 <i class="fas fa-plus"></i>
                             </button>
