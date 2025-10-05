@@ -25,20 +25,20 @@
                             placeholder: "グループ名を入力",
                             value: "" %>
                     </div> 
-                    
+
                     <div class="mb-4">
                         <label class="form-label text-gray-500">参加人数を選択してね。</label>
                         <div class="participant-counter justify-between">
                             <%= form.number_field :participant_count, 
                                 min: 1,
                                 class: "input-field",
-                                style: "width: auto;",
+                                style: "width: auto;" %>
                             <button class="counter-btn" type="button" onclick="incrementCounter()">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    
+
                     <%= form.submit class: "btn bg-blue-600 w-full" do %>
                         <i class="fas fa-plus mr-2"></i>
                         グループを作成
