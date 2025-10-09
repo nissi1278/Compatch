@@ -4,8 +4,7 @@ class GroupsController < ApplicationController
 
   def index
     @group = Group.new
-    create_groups = Group.where(session_id: session.id.public_id).order(created_at: :desc)
-    @groups = create_groups.page(params[:page]).per(5)
+    load_session_groups
   end
 
   def show
@@ -26,6 +25,7 @@ class GroupsController < ApplicationController
       create_initial_participants
       redirect_to group_path(@group), notice: 'グループが作成されました。'
     else
+      load_session_groups
       render :index, status: :unprocessable_entity
     end
   end
@@ -85,5 +85,10 @@ class GroupsController < ApplicationController
     @group.participant_count.times do |i|
       @group.participants.create(name: "参加者 #{i + 1}")
     end
+  end
+
+  def load_session_groups
+    create_groups = Group.where(session_id: session.id.public_id).order(created_at: :desc)
+    @groups = create_groups.page(params[:page]).per(5)
   end
 end
