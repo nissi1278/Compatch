@@ -4,9 +4,9 @@ class GroupsController < ApplicationController
 
   def index
     @group = Group.new
+    load_session_groups
   end
 
-  # 割り勘の「表示」・「計算」を担当。
   def show
     @participants = @group.participants.order(created_at: :asc)
     # 新しい参加者を追加するための空のインスタンス
@@ -25,11 +25,11 @@ class GroupsController < ApplicationController
       create_initial_participants
       redirect_to group_path(@group), notice: 'グループが作成されました。'
     else
+      load_session_groups
       render :index, status: :unprocessable_entity
     end
   end
 
-  # Groupの情報（合計金額など）の「更新」を担当
   def update
     if @group.update(group_params)
       recalculate_and_respond
@@ -40,7 +40,10 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to root_path, notice: 'グループが削除されました。'
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@group) }
+      format.html {redirect_to groups_path, notice: 'グループが削除されました。'}
+    end
   end
 
   private
@@ -64,7 +67,7 @@ class GroupsController < ApplicationController
     result = BillSplitterService.new(total_amount_input, @participants).call
 
     respond_to do |format|
-      format.html { redirect_to group_path(@group) }
+      format.html { redirect_to groups_path }
 
       format.turbo_stream do
         render turbo_stream: turbo_stream.update(
@@ -82,5 +85,10 @@ class GroupsController < ApplicationController
     @group.participant_count.times do |i|
       @group.participants.create(name: "参加者 #{i + 1}")
     end
+  end
+
+  def load_session_groups
+    create_groups = Group.where(session_id: session.id.public_id).order(created_at: :desc)
+    @groups = create_groups.page(params[:page]).per(5)
   end
 end

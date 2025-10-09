@@ -14,7 +14,6 @@
         <div class="w-full lg:w-8/12 px-4">
             <div class="border-0 p-4">
                 <div class="flex items-center mb-3">
-                    <i class="fas fa-calculator calculator-icon"></i>
                     <h2 class="section-title mb-0">飲み会グループ作成</h2>
                 </div>
                 <p class="form-label text-gray-500 mb-4">飲み会のグループを作成しよう。</p>
@@ -49,9 +48,16 @@
     </div>
     <div class="white-card flex flex-wrap justify-center pt-3">
         <div class="w-full lg:w-8/12 px-4">
-            <div class="flex items-center mb-4">
-                <i class="fas fa-calculator text-blue-500 text-4xl"></i>
-                <h2 class="section-title mb-0">最近作成したグループ</h2>
+            <div class="border-0 p-4">
+                <div class="mb-3">
+                    <h2 class="section-title mb-0">最近作成したグループ</h2>
+                </div>
+                <div class="space-y-2">
+                    <%= render @groups %>
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <%= paginate @groups if @groups.total_pages > 1 %>
+                </div>
             </div>
         </div>
     </div>
