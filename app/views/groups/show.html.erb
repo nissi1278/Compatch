@@ -13,6 +13,7 @@
                 class: "input-field w-full p-2 border rounded-md", 
                 placeholder: "合計金額を入力", 
                 data: { action: "input->auto-submit#submit" } %>
+            <%= inline_error_for(form, :total_amount) %>
         <% end %>
     </div>
 
