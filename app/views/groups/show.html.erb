@@ -8,8 +8,8 @@
         <h2 class="text-xl font-semibold text-gray-700">合計金額</h2>
         </div>
         
-        <%= form_with(model: @group, url: group_path(@group), method: :patch, data: { controller: "auto-submit" }) do |f| %>
-            <%= f.number_field :total_amount, 
+        <%= form_with(model: @group, url: group_path(@group), method: :patch, data: { controller: "auto-submit" }) do |form| %>
+            <%= form.number_field :total_amount, 
                 class: "input-field w-full p-2 border rounded-md", 
                 placeholder: "合計金額を入力", 
                 data: { action: "input->auto-submit#submit" } %>
