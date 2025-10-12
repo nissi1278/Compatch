@@ -526,7 +526,7 @@ DEPENDENCIES
   pry-byebug (~> 3.11.0)
   puma
   rails (~> 8.0.2)
-  rails-i18n
+  rails-i18n (~> 8.0.0)
   rspec-rails (~> 8.0.2)
   rubocop (~> 1.78.0)
   rubocop-performance (~> 1.25.0)
