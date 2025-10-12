@@ -1,25 +1,41 @@
 <%= turbo_frame_tag dom_id(participant) do %>
   <%= form_with(model: [participant.group, participant], data: { controller: "adjustment-form" }) do |f| %>
-    <div class="border border-gray-200 rounded-lg p-4">
+    <div class="border border-gray-200 rounded-lg p-4 mb-2">
       
       <div class="flex items-center justify-between mb-4">
         <span class="font-bold text-lg"><%= participant.name %></span>
-        <%= link_to "削除", [participant.group, participant], data: { turbo_method: :delete, turbo_confirm: "#{participant.name}さんを削除しますか？" }, class: "text-red-500 text-sm hover:underline" %>
+        <%= link_to [participant.group, participant],
+                    data: { turbo_method: :delete,
+                            turbo_confirm: "#{participant.name}さんを削除しますか？" },
+                    class: "text-red-500 text-sm hover:underline" do %>
+          <%= render 'shared/trash_icon' %>
+        <% end %>
       </div>
 
       <%= f.hidden_field :is_manual_fixed, data: { "adjustment-form-target": "isManualFixedField" } %>
       <%= f.hidden_field :payment_amount, data: { "adjustment-form-target": "paymentAmountField" } %>
 
       <div class="flex items-center space-x-2 mb-4">
-        <button type="button" class="btn-secondary text-sm" data-action="click->adjustment-form#toggleFixed" data-adjustment-form-target="fixedButton">
+        <button type="button" class="btn btn-primary text-sm"
+                data-action="click->adjustment-form#toggleFixed"
+                data-adjustment-form-target="fixedButton">
           金額を固定する
         </button>
       </div>
 
       <div class="grid grid-cols-3 gap-2 mb-4">
-        <button type="button" class="btn-secondary text-sm" data-action="click->adjustment-form#applyAdjustment" data-adjustment-value="1000">+1000円</button>
-        <button type="button" class="btn-secondary text-sm" data-action="click->adjustment-form#applyAdjustment" data-adjustment-value="-1000">-1000円</button>
-        <button type="button" class="btn-secondary text-sm" data-action="click->adjustment-form#applyAdjustment" data-adjustment-value="-2000">飲んでない</button>
+        <button type="button" class="btn btn-primary text-sm"
+                data-action="click->adjustment-form#applyAdjustment"
+                data-adjustment-value="1000">+1000円
+        </button>
+        <button type="button" class="btn btn-primary text-sm"
+                data-action="click->adjustment-form#applyAdjustment"
+                data-adjustment-value="-2000">飲んでない
+        </button>
+        <button type="button" class="btn btn-primary text-sm"
+                data-action="click->adjustment-form#applyAdjustment"
+                data-adjustment-value="-1000">-1000円
+        </button>
       </div>
 
       <div class="relative">
