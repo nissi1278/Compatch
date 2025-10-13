@@ -12,43 +12,57 @@
         <% end %>
       </div>
 
-      <%= f.hidden_field :is_manual_fixed, data: { "adjustment-form-target": "isManualFixedField" } %>
-      <%= f.hidden_field :payment_amount, data: { "adjustment-form-target": "paymentAmountField" } %>
-
-      <div class="flex items-center space-x-2 mb-4">
-        <button type="button" class="btn btn-primary text-sm"
-                data-action="click->adjustment-form#toggleFixed"
-                data-adjustment-form-target="fixedButton">
-          金額を固定する
-        </button>
-      </div>
+      <%= f.hidden_field :is_manual_fixed,
+                         data: { "adjustment-form-target": "isManualFixedField" },
+                         value: participant.is_manual_fixed? %>
+      <%= f.hidden_field :payment_amount,
+                         data: { "adjustment-form-target": "paymentAmountField" },
+                         value: participant.payment_amount %>
 
       <div class="grid grid-cols-3 gap-2 mb-4">
-        <button type="button" class="btn btn-primary text-sm"
+        <button type="button"
+                class="btn btn-primary text-sm"
                 data-action="click->adjustment-form#applyAdjustment"
-                data-adjustment-value="1000">+1000円
+                data-adjustment-value="1000"
+                data-adjustment-form-target="editableElement"
+                <%= 'disabled' unless participant.is_manual_fixed? %>>
+          +1000円
         </button>
-        <button type="button" class="btn btn-primary text-sm"
+        <button type="button"
+                class="btn btn-primary text-sm"
                 data-action="click->adjustment-form#applyAdjustment"
-                data-adjustment-value="-2000">飲んでない
+                data-adjustment-value="-2000"
+                data-adjustment-form-target="editableElement"
+                <%= 'disabled' unless participant.is_manual_fixed? %>>
+          飲んでない
         </button>
-        <button type="button" class="btn btn-primary text-sm"
+        <button type="button"
+                class="btn btn-primary text-sm"
                 data-action="click->adjustment-form#applyAdjustment"
-                data-adjustment-value="-1000">-1000円
+                data-adjustment-value="-1000"
+                data-adjustment-form-target="editableElement"
+                <%= 'disabled' unless participant.is_manual_fixed? %>>
+          -1000円
         </button>
       </div>
 
-      <div class="relative">
-        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">¥</span>
-        <input 
-          type="number" 
-          value="<%= participant.payment_amount %>" 
-          class="w-full pl-8 pr-12 py-3 border border-gray-300 rounded-lg text-right"
-          placeholder="0"
-          data-adjustment-form-target="displayAmount"
-          data-action="input->adjustment-form#manualUpdate"
-        />
-        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">円</span>
+      <div class="flex items-center space-x-2">
+        <div class="shrink-0">
+          <%= render "shared/manual_fixed_icon", is_manual_fixed: participant.is_manual_fixed? %>
+        </div>
+        <div class="relative w-full">
+          <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">¥</span>
+          <input
+            type="number"
+            value="<%= participant.payment_amount %>"
+            class="w-full pl-8 pr-12 py-3 border border-gray-300 rounded-lg text-right"
+            placeholder="0"
+            data-adjustment-form-target="displayAmount editableElement"
+            data-action="input->adjustment-form#manualUpdate"
+            <%= 'disabled' unless participant.is_manual_fixed? %>
+            />
+          <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">円</span>
+        </div>
       </div>
     </div>
   <% end %>

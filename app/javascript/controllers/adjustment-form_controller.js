@@ -3,28 +3,32 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   // JSが操作するHTML要素をすべてターゲットとして登録
   static targets = [
-    "isManualFixedField", 
-    "paymentAmountField", 
+    "isManualFixedField",
+    "paymentAmountField",
     "displayAmount",
-    "fixedButton"
+    "fixedButton",
+    "lockIcon",
+    "editableElement"
   ]
 
   connect() {
-    this.updateFixedButtonClass()
   }
 
   // 「金額固定」チェックボックスの処理
   toggleFixed(event) {
     event.preventDefault()
-    const isCurrentlyFixed = this.isManualFixedFieldTarget.value === 'true'
-    this.isManualFixedFieldTarget.value = !isCurrentlyFixed
 
-    // 固定が解除されたら、金額をリセット
-    if (!isCurrentlyFixed === false) {
-      this.paymentAmountFieldTarget.value = ''
-      this.displayAmountTarget.value = ''
+    // 現在の状態を 'true'（文字列）と比較して取得
+    const isCurrentlyFixed = this.isManualFixedFieldTarget.value === 'true'
+    const isNowFixed = !isCurrentlyFixed
+    this.isManualFixedFieldTarget.value = isNowFixed
+
+    // 新しい状態が「固定でない」場合に金額を0にリセット
+    if (!isNowFixed) {
+      this.paymentAmountFieldTarget.value = 0
+      this.displayAmountTarget.value = 0
     }
-    
+    this.updateFormState()
     this.element.requestSubmit()
   }
 
@@ -51,13 +55,22 @@ export default class extends Controller {
     this.element.requestSubmit()
   }
 
-  // 固定ボタンの見た目を更新
-  updateFixedButtonClass() {
+  /**
+   * @private
+   * アイコンの表示/非表示を切り替えるヘルパーメソッド
+   */
+  updateFormState() {
     const isFixed = this.isManualFixedFieldTarget.value === 'true'
-    if (isFixed) {
-      this.fixedButtonTarget.classList.add('bg-yellow-200', 'text-yellow-800')
-    } else {
-      this.fixedButtonTarget.classList.remove('bg-yellow-200', 'text-yellow-800')
-    }
+
+    // アイコンの表示を切り替える
+    const [unlockedIcon, lockedIcon] = this.lockIconTargets
+    unlockedIcon.classList.toggle('hidden', isFixed)
+    lockedIcon.classList.toggle('hidden', !isFixed)
+
+    // 編集可能な全要素のdisabled状態を切り替える
+    this.editableElementTargets.forEach((element) => {
+      // isFixedがtrueなら有効(disabled=false)に、falseなら無効(disabled=true)にする
+      element.disabled = !isFixed
+    })
   }
 }
