@@ -24,6 +24,12 @@
 .btn:hover {
     @apply -translate-y-px
 }
+.btn:disabled {
+    @apply opacity-50 cursor-not-allowed
+}
 .btn-primary {
     @apply bg-blue-600 hover:bg-blue-700  flex items-center justify-center gap-2 transition-colors
+}
+.btn-primary {
+    @apply disabled:bg-blue-300
 }
