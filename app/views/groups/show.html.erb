@@ -9,10 +9,12 @@
         </div>
         
         <%= form_with(model: @group, url: group_path(@group), method: :patch, data: { controller: "auto-submit" }) do |form| %>
-            <%= form.number_field :total_amount, 
+            <%= form.number_field :total_amount,
                 class: "input-field w-full p-2 border rounded-md", 
                 placeholder: "合計金額を入力", 
-                data: { action: "input->auto-submit#submit" } %>
+                data: { action: "input->auto-submit#submit" },
+                min: 0
+            %>
             <%= inline_error_for(form, :total_amount) %>
         <% end %>
     </div>
