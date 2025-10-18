@@ -8,6 +8,7 @@ export default class extends Controller {
     "displayAmount",
     "fixedButton",
     "lockIcon",
+    "unlockIcon",
     "editableElement"
   ]
 
@@ -23,12 +24,13 @@ export default class extends Controller {
     const isNowFixed = !isCurrentlyFixed
     this.isManualFixedFieldTarget.value = isNowFixed
 
+    console.log(isNowFixed)
     // 新しい状態が「固定でない」場合に金額を0にリセット
     if (!isNowFixed) {
       this.paymentAmountFieldTarget.value = 0
       this.displayAmountTarget.value = 0
     }
-    this.updateFormState()
+    this.updateFormState(isNowFixed)
     this.element.requestSubmit()
   }
 
@@ -59,18 +61,18 @@ export default class extends Controller {
    * @private
    * アイコンの表示/非表示を切り替えるヘルパーメソッド
    */
-  updateFormState() {
-    const isFixed = this.isManualFixedFieldTarget.value === 'true'
-
+  updateFormState(isNowFixed) {
     // アイコンの表示を切り替える
-    const [unlockedIcon, lockedIcon] = this.lockIconTargets
-    unlockedIcon.classList.toggle('hidden', isFixed)
-    lockedIcon.classList.toggle('hidden', !isFixed)
+    const lockedIcon = this.lockIconTarget
+    const unlockedIcon = this.unlockIconTarget
+
+    lockedIcon.classList.toggle('hidden', !isNowFixed)
+    unlockedIcon.classList.toggle('hidden', isNowFixed)
 
     // 編集可能な全要素のdisabled状態を切り替える
     this.editableElementTargets.forEach((element) => {
-      // isFixedがtrueなら有効(disabled=false)に、falseなら無効(disabled=true)にする
-      element.disabled = !isFixed
+      // isNowFixedがtrueなら有効(disabled=false)に、falseなら無効(disabled=true)にする
+      element.disabled = !isNowFixed
     })
   }
 }
