@@ -10,8 +10,9 @@ class Group < ApplicationRecord
             numericality: { only_integer: true, greater_than: 0 },
             on: :create
 
-  after_initialize :set_default_participant_count
+  has_secure_token :share_token
 
+  after_initialize :set_default_participant_count
   scope :created_by_session, ->(session_id) { where(session_id: session_id) }
 
   private
