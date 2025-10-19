@@ -6,7 +6,7 @@ class Participant < ApplicationRecord
             length: { maximum: 20 }
   validates :payment_amount,
             presence: true,
-            numericality: { only_integer: true, greater_than: 0 }
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :is_manual_fixed,
             inclusion: { in: [true, false] }
 end
