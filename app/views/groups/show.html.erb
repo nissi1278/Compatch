@@ -28,6 +28,16 @@
         <%= turbo_frame_tag "calculation_results" do %>
             <%= render 'groups/calculation_results', result: @result %>
         <% end %>
+        <div>
+          <%= link_to "結果共有リンクをコピー",
+                      share_group_path(@group.share_token),
+                      class: "btn btn-primary",
+                      data: {
+                        controller: "clipboard",
+                        action: "click->clipboard#copy",
+                        clipboard_url_value: share_group_url(@group.share_token)
+                      }%>
+        </div>
     </div>
 
     <div class="white-card border-0 p-4">
