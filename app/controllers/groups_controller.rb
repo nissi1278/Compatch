@@ -46,6 +46,12 @@ class GroupsController < ApplicationController
     end
   end
 
+  def share
+    @group = Group.find_by!(share_token: params[:share_token])
+    participants = @group.participants
+    @result = BillSplitterService.new(@group.total_amount, participants).call
+  end
+
   private
 
   def group_params
