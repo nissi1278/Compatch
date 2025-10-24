@@ -66,8 +66,9 @@ export default class extends Controller {
     const lockedIcon = this.lockIconTarget
     const unlockedIcon = this.unlockIconTarget
 
-    lockedIcon.classList.toggle('hidden', !isNowFixed)
-    unlockedIcon.classList.toggle('hidden', isNowFixed)
+    console.log(isNowFixed)
+    lockedIcon.classList.toggle('hidden', isNowFixed)
+    unlockedIcon.classList.toggle('hidden', !isNowFixed)
 
     // 編集可能な全要素のdisabled状態を切り替える
     this.editableElementTargets.forEach((element) => {
