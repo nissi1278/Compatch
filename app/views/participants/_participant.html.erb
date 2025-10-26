@@ -17,30 +17,22 @@
       <%= form.hidden_field :payment_amount,
                          data: { "adjustment-form-target": "paymentAmountField" } %>
 
-      <div class="grid grid-cols-3 gap-2 mb-4">
+      <div class="flex gap-2 mb-4">
         <button type="button"
-                class="btn btn-danger text-sm"
+                class="btn btn-danger text-lg flex-1"
                 data-action="click->adjustment-form#applyAdjustment"
                 data-adjustment-value="-1000"
                 data-adjustment-form-target="editableElement"
                 <%= 'disabled' unless participant.is_manual_fixed? %>>
-          -1000円
+          -
         </button>
         <button type="button"
-                class="btn btn-neutral text-sm"
-                data-action="click->adjustment-form#applyAdjustment"
-                data-adjustment-value="-2000"
-                data-adjustment-form-target="editableElement"
-                <%= 'disabled' unless participant.is_manual_fixed? %>>
-          飲んでない
-        </button>
-        <button type="button"
-                class="btn btn-primary text-sm"
+                class="btn btn-primary text-lg flex-1"
                 data-action="click->adjustment-form#applyAdjustment"
                 data-adjustment-value="1000"
                 data-adjustment-form-target="editableElement"
                 <%= 'disabled' unless participant.is_manual_fixed? %>>
-          +1000円
+          +
         </button>
       </div>
 
