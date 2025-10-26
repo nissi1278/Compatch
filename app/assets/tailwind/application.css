@@ -28,8 +28,13 @@
     @apply opacity-50 cursor-not-allowed
 }
 .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700  flex items-center justify-center gap-2 transition-colors
+    @apply bg-blue-600 hover:bg-blue-700 flex items-center justify-center gap-2 transition-colors disabled:bg-blue-300
 }
-.btn-primary {
-    @apply disabled:bg-blue-300
+
+.btn-neutral {
+    @apply bg-gray-600 hover:bg-gray-700 flex items-center justify-center gap-2 transition-colors disabled:bg-gray-300
+}
+
+.btn-danger {
+    @apply bg-pink-600 hover:bg-pink-700 flex items-center justify-center gap-2 transition-colors disabled:bg-pink-300
 }
