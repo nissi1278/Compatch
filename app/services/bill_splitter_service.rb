@@ -56,6 +56,9 @@ class BillSplitterService
     fixed_total_sum_paid = fixed_payments_total
     amount_to_split = amount_floor_value - fixed_total_sum_paid
 
+    # もし固定額が多すぎてマイナスになったら、未固定の人は0円にする
+    amount_to_split = 0 if amount_to_split.negative?
+
     # .firstでdivmodの商（一人あたりの金額）のみ取得
     calculate_unfixed_split(amount_to_split).first
   end
