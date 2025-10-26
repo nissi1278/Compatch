@@ -1,4 +1,4 @@
-<div class="mt-4 p-4 bg-white rounded-lg shadow-sm">
+<div class="mt-4 p-4 bg-white rounded-lg shadow-sm text-lg">
     <% payment_rows = result[:payment_rows] %>
     <% summary = result[:summary] %>
     <% if payment_rows.present? %>
@@ -6,26 +6,30 @@
             <div class="flex justify-between items-center py-2 <%= 'border-b border-gray-200' unless row == payment_rows.last %>">
                 <div>
                     <% if row[:participants].count == 1 %>
-                        <span class="font-medium"><%= row[:participants].first.name %></span>
+                        <span><%= row[:participants].first.name %></span>
                     <% else %>
-                        <div class="font-medium"><%= row[:participants].count %>人のグループ</div>
-                        <div class="text-sm text-gray-500">
-                        <%= row[:participants].map(&:name).join('・') %>
+                        <div ><%= row[:participants].count %>人のグループ</div>
+                        <div class="text-gray-700 pl-2">
+                          <% row[:participants].each do |participant| %>
+                            <div>
+                              <%= participant.name %>
+                            </div>
+                          <% end %>
                         </div>
                     <% end %>
                 </div>
-                <span class="font-bold">
-                <%= number_to_currency(row[:amount], precision: 0, unit: "¥", format: "%u%n") %>
+                <span class="font-bold ">
+                  <%= number_to_currency(row[:amount], precision: 0, unit: "¥", format: "%u%n") %>
                 </span>
             </div>
         <% end %>
-        <div class="bg-gray-50 rounded-lg p-4 mt-6">
-            <div class="flex justify-between text-sm text-gray-600">
+        <div class="bg-gray-50 rounded-lg p-4 mt-6 text-lg">
+            <div class="flex justify-between text-gray-600">
                 <span>元の合計金額</span>
                 <span>実際の支払合計</span>
                 <span>端数・残高</span>
             </div>
-            <div class="flex justify-between font-bold text-lg mt-1">
+            <div class="flex justify-between font-bold mt-1">
                 <span><%= number_to_currency(summary[:total_amount], precision: 0, unit: "¥", format: "%u%n") %></span>
                 <span><%= number_to_currency(summary[:total_paid], precision: 0, unit: "¥", format: "%u%n") %></span>
                 <span class="text-red-500"><%= number_to_currency(summary[:remainder], precision: 0, unit: "¥", format: "%u%n") %></span>

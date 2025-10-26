@@ -36,6 +36,10 @@ class BillSplitterService
   # 指定された桁数で金額を切り捨てし、切り捨て後の値と切り捨てた値を計算する
   def split_amount_by_digits
     digits = 10**@floor_digits
+
+    # 入力金額より切り捨てする金額が大きい場合、そのままreturn
+    return [@total_amount, 0] if digits > @total_amount
+
     truncated_value = @total_amount % digits
     floor_value = @total_amount - truncated_value
     [floor_value, truncated_value]
@@ -51,6 +55,9 @@ class BillSplitterService
     amount_floor_value, = split_amount_by_digits
     fixed_total_sum_paid = fixed_payments_total
     amount_to_split = amount_floor_value - fixed_total_sum_paid
+
+    # もし固定額が多すぎてマイナスになったら、未固定の人は0円にする
+    amount_to_split = 0 if amount_to_split.negative?
 
     # .firstでdivmodの商（一人あたりの金額）のみ取得
     calculate_unfixed_split(amount_to_split).first
