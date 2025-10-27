@@ -33,7 +33,7 @@ class BillSplitterService
     }
   end
 
-  # 指定された桁数で金額を切り捨てし、切り捨て後の値と切り捨てた値を計算する
+  # 指定された桁数で金額を切り上げし、切り上げ後の値と差額を計算する
   def split_amount_by_digits
     digits = 10**@floor_digits
 
