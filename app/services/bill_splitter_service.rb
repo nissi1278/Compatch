@@ -1,9 +1,9 @@
 class BillSplitterService
-  def initialize(total_amount, all_participants, floor_digits: 0)
+  def initialize(total_amount, all_participants, rounding_unit: 500)
     @total_amount = total_amount
     @all_participants = all_participants
     @fixed_participants, @unfixed_participants = all_participants.partition(&:is_manual_fixed)
-    @floor_digits = floor_digits
+    @rounding_unit = rounding_unit
   end
 
   # 入力された合計金額と参加者すべてを受け取り、金額を分割する処理。
@@ -28,7 +28,7 @@ class BillSplitterService
       summary: {
         total_amount: @total_amount,
         total_paid: 0,
-        remainder: @total_amount
+        remainder: 0
       }
     }
   end
@@ -40,20 +40,33 @@ class BillSplitterService
 
   # 切り捨て後の支払い金額から割り勘金額を計算
   def calculate_base_amount
-    amount_to_split = amount_floor_value - @total_amount
+    fixed_total_sum_paid = fixed_payments_total
+    amount_to_split = @total_amount - fixed_total_sum_paid
 
     # もし固定額が多すぎてマイナスになったら、未固定の人は0円にする
     amount_to_split = 0 if amount_to_split.negative?
 
     # .firstでdivmodの商（一人あたりの金額）のみ取得
-    calculate_unfixed_split(amount_to_split).first
+    calculate_unfixed_split(amount_to_split)
   end
 
   # 金額未固定の参加者の支払い金額を計算する
   def calculate_unfixed_split(amount)
-    return [0, 0] if @unfixed_participants.none?
+    return 0 if @unfixed_participants.none?
 
-    amount.divmod(@unfixed_participants.count)
+    unfixed_amount = amount.to_f / @unfixed_participants.count
+    unfixed_amount_ceil(unfixed_amount)
+  end
+
+  # 金額未固定の参加者の支払い金額を指定された金額で切り上げる(ざっくり割り用)
+  def unfixed_amount_ceil(unfixed_amount)
+    # 切り上げ桁が1以下の場合、何もせずにそのまま金額を返す(floatにしているので、intで返す)
+    return unfixed_amount.to_i if @rounding_unit <= 1
+
+    ratio = (unfixed_amount.to_f / @rounding_unit).ceil
+
+    # 切り上げ後の金額を返す
+    (ratio * @rounding_unit).to_i
   end
 
   # 参加者オブジェクトと支払い金額をまとめたハッシュを配列形式で返す
@@ -83,7 +96,7 @@ class BillSplitterService
   # サマリー部分を作成するメソッド
   def calculate_summary(payment_list, unfixed_base_amount)
     total_paid = payment_list.sum { |item| item[:amount] }
-    final_remainder = @total_amount - total_paid
+    final_remainder = total_paid - @total_amount
     {
       total_amount: @total_amount,
       total_paid: total_paid,
@@ -95,10 +108,10 @@ class BillSplitterService
   # 最終的な計算結果を配列のハッシュ形式で返す
   def build_amount_result(unfixed_base_amount)
     payment_list = build_payment_list(unfixed_base_amount)
-
     {
       payment_rows: create_grouped_payments(payment_list),
       summary: calculate_summary(payment_list, unfixed_base_amount)
     }
   end
 end
+
