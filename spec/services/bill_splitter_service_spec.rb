@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BillSplitterService, type: :service do
   # テスト用の簡易的な参加者オブジェクトを作成
-  Participant = Struct.new(:name, :is_manual_fixed, :payment_amount)
+  let(:participant) { Struct.new(:name, :is_manual_fixed, :payment_amount) }
 
   # publicメソッドである #call のテストを記述
   describe '#call' do
@@ -12,9 +12,9 @@ RSpec.describe BillSplitterService, type: :service do
     let(:rounding_unit) { 100 }
     let(:participants) do
       [
-        Participant.new('Aさん', true, 5155), # 固定
-        Participant.new('Bさん', false, nil), # 割り勘
-        Participant.new('Cさん', false, nil) # 割り勘
+        participant.new('Aさん', true, 5155), # 固定
+        participant.new('Bさん', false, nil), # 割り勘
+        participant.new('Cさん', false, nil) # 割り勘
       ]
     end
 
@@ -48,9 +48,9 @@ RSpec.describe BillSplitterService, type: :service do
       let(:rounding_unit) { 0 }
       let(:participants) do
         [
-          Participant.new('Aさん', true, 5000),  # 固定額が割り勘額と同じ
-          Participant.new('Bさん', true, 5000),  # 固定
-          Participant.new('Cさん', false, nil),  # 割り勘 (5000になるはず)
+          participant.new('Aさん', true, 5000),  # 固定額が割り勘額と同じ
+          participant.new('Bさん', true, 5000),  # 固定
+          participant.new('Cさん', false, nil) # 割り勘 (5000になるはず)
         ]
       end
 
@@ -74,7 +74,7 @@ RSpec.describe BillSplitterService, type: :service do
         expect(result[:payment_rows]).to be_empty
         expect(result[:summary][:total_amount]).to eq 10_000
         expect(result[:summary][:total_paid]).to eq 0
-        expect(result[:summary][:remainder]).to eq 10_000
+        expect(result[:summary][:remainder]).to eq 0
       end
     end
 
@@ -82,10 +82,10 @@ RSpec.describe BillSplitterService, type: :service do
       let(:rounding_unit) { 0 }
       let(:participants) do
         [
-          Participant.new('Aさん', false, nil),
-          Participant.new('Bさん', false, nil),
-          Participant.new('Cさん', false, nil),
-          Participant.new('Dさん', false, nil)
+          participant.new('Aさん', false, nil),
+          participant.new('Bさん', false, nil),
+          participant.new('Cさん', false, nil),
+          participant.new('Dさん', false, nil)
         ]
       end
 

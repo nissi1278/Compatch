@@ -2,7 +2,7 @@ class Group < ApplicationRecord
   has_many :participants, dependent: :destroy
   attr_accessor :participant_count
 
-  validates :name, 
+  validates :name,
             presence: true,
             length: { maximum: 20 }
   validates :participant_count,

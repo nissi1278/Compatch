@@ -114,4 +114,3 @@ class BillSplitterService
     }
   end
 end
-
