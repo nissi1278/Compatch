@@ -49,6 +49,7 @@ module Groups
       ]
     end
 
+    # rubocop:disable Metrics/MethodLength
     # 追加時の応答 (リストへの追加 + 計算結果の更新)
     def recalculate_and_respond_for_create
       result = recalculate_result
@@ -76,6 +77,7 @@ module Groups
         )
       ]
     end
+    # rubocop:enable Metrics/MethodLength
 
     # 削除時の応答 (リストからの削除 + 計算結果の更新)
     def recalculate_and_respond_for_destroy
