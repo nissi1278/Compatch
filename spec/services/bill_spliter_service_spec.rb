@@ -50,7 +50,7 @@ RSpec.describe BillSplitterService, type: :service do
         [
           Participant.new('Aさん', true, 5000),  # 固定額が割り勘額と同じ
           Participant.new('Bさん', true, 5000),  # 固定
-          Participant.new('Cさん', false, nil),  # 割り勘 (5000になるはず)
+          Participant.new('Cさん', false, nil) # 割り勘 (5000になるはず)
         ]
       end
 
