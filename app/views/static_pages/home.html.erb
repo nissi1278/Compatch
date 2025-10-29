@@ -1,0 +1,93 @@
+<main class="font-sans text-gray-900 leading-7 bg-gray-50">
+
+  <section class="py-16 md:py-24 text-center">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-snug">
+        もう、飲み会の<br>「割り勘」でモヤモヤしない。
+      </h2>
+      <p class="text-lg text-gray-700 mb-8">
+        Compatchは、面倒な端数計算や傾斜配分を自動化する、<br class="hidden md:inline">幹事のためのスマート割り勘ツールです。
+      </p>
+
+      <%= link_to "今すぐ割り勘グループを作成する", "#create", class: "btn btn-primary text-lg" %>
+
+<!--      <div class="mt-16 md:mt-24">-->
+        <%#= image_tag "cheers.png", alt: "Compatchで楽しく割り勘する人々のイラスト", class: "mx-auto w-full md:w-3/4 lg:w-2/3 h-auto rounded-xl shadow-lg border border-gray-200" %>
+<!--      </div>-->
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-white border-t border-gray-200">
+    <div class="max-w-5xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center mb-12">
+        幹事の「面倒」をすべて解決
+      </h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+          <%# ↓ "text-brand-blue" を "text-blue-600" に変更 %>
+          <h4 class="text-blue-600 font-bold mb-2 text-lg">面倒な「端数」は自動でまるめ</h4>
+          <p class="text-gray-700 text-sm leading-6">100円、1000円単位など、キリの良い金額に自動で上乗せ。集金もスムーズです。もちろん「余り」も自動計算。</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+          <%# ↓ "text-brand-blue" を "text-blue-600" に変更 %>
+          <h4 class="text-blue-600 font-bold mb-2 text-lg">人別の「傾斜配分」もカンタン</h4>
+          <p class="text-gray-700 text-sm leading-6">「Aさんは少なめ」「Bさんは多め」など、参加者ごとに金額を固定したり、調整したり。不平不満をなくします。</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+          <%# ↓ "text-brand-blue" を "text-blue-600" に変更 %>
+          <h4 class="text-blue-600 font-bold mb-2 text-lg">結果は「リンク」で一発共有</h4>
+          <p class="text-gray-700 text-sm leading-6">誰がいくら払うか、計算結果をURLでかんたんに共有。後からの確認もでき、透明性もバッチリです。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center mb-12">
+        使い方はカンタン 3ステップ
+      </h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-3xl shadow-md border border-gray-200">
+          <%# ↓ "bg-brand-blue" を "bg-blue-600" に変更 %>
+          <span class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        STEP 1
+                    </span>
+          <h4 class="font-bold text-lg mb-2">グループ作成</h4>
+          <p class="text-gray-700 text-sm leading-6">飲み会の名前と参加人数を決めます。（後から変更OK）</p>
+        </div>
+        <div class="bg-white p-6 rounded-3xl shadow-md border border-gray-200">
+          <%# ↓ "bg-brand-blue" を "bg-blue-600" に変更 %>
+          <span class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        STEP 2
+                    </span>
+          <h4 class="font-bold text-lg mb-2">金額入力 & 調整</h4>
+          <p class="text-gray-700 text-sm leading-6">合計金額を入力。自動計算しつつ、人別に金額調整もできます。</p>
+        </div>
+        <div class="bg-white p-6 rounded-3xl shadow-md border border-gray-200">
+          <%# ↓ "bg-brand-blue" を "bg-blue-600" に変更 %>
+          <span class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        STEP 3
+                    </span>
+          <h4 class="font-bold text-lg mb-2">結果を共有</h4>
+          <p class="text-gray-700 text-sm leading-6">計算結果のURLをコピーして、参加者にシェアするだけ！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-blue-600 text-white text-center" id="create">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-snug">
+        さあ、面倒な割り勘を<br>今すぐ終わらせましょう。
+      </h2>
+      <p class="text-blue-200 text-lg mb-8">
+        グループ作成に、登録は不要です。
+      </p>
+
+      <%# ↓ "text-brand-blue" を "text-blue-600" に変更 %>
+      <%= link_to "割り勘グループを作成する", groups_path, class: "inline-block bg-white text-blue-600 font-bold py-4 px-10 rounded-xl text-xl transition duration-200 hover:-translate-y-0.5 hover:shadow-lg" %>
+    </div>
+  </section>
+
+</main>
