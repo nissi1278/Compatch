@@ -60,25 +60,12 @@ jobs:
         shell: bash
         run: |
           set -x # 実行するコマンドをトレース表示
-
-          echo "--- Debugging AWS CLI ---"
-          echo "Path to aws (which):"
-          which aws
-          echo "Path to aws (type - P (force path lookup)):"
-          type -P aws
-          echo "AWS CLI Version:"
-          aws --version
-          echo "-------------------------"
           
           S3_KEY="${{ env.S3_KEY_PREFIX }}/deploy_artifact-${{ github.sha }}.zip"
           echo "Deploying from s3://${{ env.S3_BUCKET }}/${S3_KEY}"
           
-          /usr/local/bin/aws --version
-
-          echo "Running create-deployment with full path..."
-          /usr/local/bin/aws codedeploy create-deployment \
+          aws deploy create-deployment \
             --application-name ${{ env.APP_NAME }} \
             --deployment-group-name ${{ env.GROUP_NAME }} \
             --s3-location bucket=${{ env.S3_BUCKET }},key=${S3_KEY},bundleType=zip \
             --description "Deployed commit ${{ github.sha }} from GitHub Actions"
-
