@@ -42,7 +42,7 @@ jobs:
 
       # デプロイ用zipファイルの作成
       - name: Create deployment artifact
-        run: zip -r deploy_artifact.zip . -x ".git/*" ".github/*" ".idea/*"
+        run: zip -r deploy_artifact.zip . -x ".git/*" ".github/*" ".idea/*" ".vscode/*"
 
       # zipファイルをS3にアップロード
       - name: Upload artifact to S3
