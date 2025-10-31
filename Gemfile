@@ -18,6 +18,10 @@ gem "thruster", require: false
 gem "tailwindcss-rails", "~> 4.3.0"
 gem "puma"
 gem 'activerecord-session_store', "~> 2.2.0"
+gem "jsbundling-rails", "~> 1.3.0"
+gem "cssbundling-rails", "~> 1.4.0"
+gem "kaminari", "~> 1.2.0"
+gem "rails-i18n", "~>8.0.0"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -35,6 +39,7 @@ group :development, :test do
   gem "rubocop-performance", "~>1.25.0"
   gem "rubocop-rails", "~>2.32.0"
   gem "rubocop-rspec", "~>3.6.0"
+  gem "factory_bot_rails", "~>6.5.0"
 end
 
 group :development do

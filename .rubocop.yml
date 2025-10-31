@@ -52,6 +52,16 @@ Layout/TrailingWhitespace:
   Exclude:
     - 'Gemfile'
     - 'Rakefile'
+
+# Metrics
+Metrics/BlockLength: 
+  Enabled: true
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*_spec.rb'
+Metrics/MethodLength:
+  Max: 15
+
 # budler
 Bundler/OrderedGems:
   Exclude:
@@ -62,6 +72,14 @@ RSpec/SpecFilePathFormat:
   Enabled: true
 RSpec/SpecFilePathSuffix:
   Enabled: true
+RSpec/MultipleExpectations:
+  Max: 5
+RSpec/ExampleLength:
+  Max: 15
+RSpec/NestedGroups:
+  Max: 5
+RSpec/ContextWording:
+  Enabled: false
 
 # Rails
 Rails/SkipsModelValidations:

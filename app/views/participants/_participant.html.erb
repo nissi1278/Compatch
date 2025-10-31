@@ -1,78 +1,58 @@
-<div id="<%= dom_id(participant) %>" class="border border-gray-200 rounded-lg p-4">
-  <div class="flex items-center justify-between mb-4">
-    <div class="flex items-center gap-3">
-      <div class="p-2 bg-blue-100 rounded-full">
-        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
+<%= turbo_frame_tag dom_id(participant) do %>
+  <%= form_with(model: [participant.group, participant], data: { controller: "adjustment-form" }) do |form| %>
+    <div class="border border-gray-200 rounded-lg p-4 mb-2">
+      
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-bold text-lg"><%= participant.name %></span>
+        <%= link_to [participant.group, participant],
+                    data: { turbo_method: :delete,
+                            turbo_confirm: "#{participant.name}さんを削除しますか？" },
+                    class: "text-red-500 text-sm hover:underline" do %>
+          <%= render 'shared/trash_icon' %>
+        <% end %>
       </div>
-      <span class="font-bold text-lg"><%= participant.name %></span>
-    </div>
-    <%= form_with(model: [participant.group, participant], method: :delete, data: { turbo_confirm:
-    '本当にこの参加者を削除しますか？', turbo_stream: true }) do |form| %> <%= form.button type:
-    'submit', class: "p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors" do %>
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <polyline points="3,6 5,6 21,6" />
-      <path d="M19,6v14a2,2 0,0,1-2,2H7a2,2 0,0,1-2-2V6m3,0V4a2,2 0,0,1,2-2h4a2,2 0,0,1,2,2v2" />
-      <line x1="10" y1="11" x2="10" y2="17" />
-      <line x1="14" y1="11" x2="14" y2="17" />
-    </svg>
-    <% end %> <% end %>
-  </div>
 
-  <div class="pb-2">
-    <%= form_with(model: [participant.group, participant], url:
-    group_participant_path(participant.group, participant), method: :patch, data: { turbo_stream:
-    true, controller: "adjustment-form" }) do |form| %> <%= form.hidden_field :is_manual_fixed,
-    value: participant.is_manual_fixed, data: { "adjustment-form-target": "isManualFixedField" } %>
-    <%= form.hidden_field :payment_amount, value: participant.payment_amount, data: {
-    "adjustment-form-target": "fixedAmountField" } %>
-      <button
-        type="submit"
-        class="p-2 rounded-lg transition-colors #{'bg-yellow-200 text-yellow-800' if participant.is_manual_fixed} hover:bg-yellow-100"
-        data-action="click->adjustment-form#toggleFixed"
-      >
-      <div class="flex gap-3 mb-4">
-        <button
-          type="submit"
-          class="btn flex-1 bg-gray-400 text-gray-700 border-gray-300 hover:bg-gray-200 transition-colors"
-          data-action="click->adjustment-form#applyAdjustment"
-          data-adjustment-type="plus"
-          data-adjustment-value="<%= 1000 %>"
-        >
-          多め
+      <%= form.hidden_field :is_manual_fixed,
+                         data: { "adjustment-form-target": "isManualFixedField" } %>
+      <%= form.hidden_field :payment_amount,
+                         data: { "adjustment-form-target": "paymentAmountField" } %>
+
+      <div class="flex gap-2 mb-4">
+        <button type="button"
+                class="btn btn-danger text-lg flex-1"
+                data-action="click->adjustment-form#applyAdjustment"
+                data-adjustment-value="-1000"
+                data-adjustment-form-target="editableElement"
+                <%= 'disabled' unless participant.is_manual_fixed? %>>
+          -
         </button>
-        <button
-          type="submit"
-          class="btn flex-1 bg-gray-400 text-gray-700 border-gray-300 hover:bg-gray-200 transition-colors"
-          data-action="click->adjustment-form#applyAdjustment"
-          data-adjustment-type="minus"
-          data-adjustment-value="<%= -1000 %>"
-        >
-          少なめ
-        </button>
-        <button
-          type="submit"
-          class="btn flex-1 bg-gray-400 text-gray-700 border-gray-300 hover:bg-gray-200 transition-colors"
-          data-action="click->adjustment-form#applyAdjustment"
-          data-adjustment-type="not_drinking"
-          data-base-amount="<%= @per_person_amount%>"
-        >
-          飲んでない
+        <button type="button"
+                class="btn btn-primary text-lg flex-1"
+                data-action="click->adjustment-form#applyAdjustment"
+                data-adjustment-value="1000"
+                data-adjustment-form-target="editableElement"
+                <%= 'disabled' unless participant.is_manual_fixed? %>>
+          +
         </button>
       </div>
-    <% end %>
-    <div class="relative">
-      <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
-        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-        </svg>
+
+      <div class="flex items-center space-x-2">
+        <div class="shrink-0">
+          <%= render "shared/manual_fixed_icon", is_manual_fixed: participant.is_manual_fixed? %>
+        </div>
+        <div class="relative w-full">
+          <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">¥</span>
+          <%= form.number_field :payment_amount,
+              class: "w-full pl-8 pr-12 py-3 border border-gray-300 rounded-lg text-right",
+              placeholder: "0",
+              data: { "adjustment-form-target": "displayAmount editableElement",
+                      action: "input->adjustment-form#manualUpdate" },
+              disabled: !participant.is_manual_fixed?
+          %>
+          <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">円</span>
+          <%= inline_error_for(form, :payment_amount) %>
+        </div>
       </div>
-      <input type="text" placeholder="支払い金額：" value=<%=participant.payment_amount %>
-      class="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2
-      focus:ring-blue-500 focus:border-transparent" />
-      <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">円</span>
     </div>
-</div>
+  <% end %>
+<% end %>
