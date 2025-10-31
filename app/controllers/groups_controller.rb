@@ -1,64 +1,56 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: %i[show calculate]
+  before_action :set_group, only: %i[show update destroy]
+  include CalculationResponder
 
   def index
     @group = Group.new
+    load_session_groups
   end
 
   def show
-    # @group = Group.find()
-  end
+    @participants = @group.participants.order(created_at: :asc)
+    # 新しい参加者を追加するための空のインスタンス
+    @participant = @group.participants.build
+    total_amount_input = @group.total_amount || 0
 
-  def edit; end
+    @result = BillSplitterService.new(total_amount_input, @participants).call
+  end
 
   def create
     @group = Group.new(group_create_params)
+    @group.participant_count = params[:group][:participant_count].to_i
     @group.session_id = session.id
+
     if @group.save
-      redirect_to calculate_group_path(@group)
+      create_initial_participants
+      redirect_to group_path(@group), notice: 'グループが作成されました。'
     else
+      load_session_groups
       render :index, status: :unprocessable_entity
     end
   end
 
-  def update; end
-
-  def destroy; end
-
-  def calculate
-    @group.update(group_params) if request.patch? && params[:group].present?
-
-    @participants = @group.participants.order(created_at: :asc)
-    total_amount_input = @group.total_amount || 0
-
-    calculated_data = BillSplitter.calculate_split_bill(total_amount_input, @participants)
-    @per_person_amount = calculated_data[:per_person_base_amount]
-    @remainder_amount = calculated_data[:remainder_amount]
-    @grouped_amounts = calculated_data[:grouped_amounts]
-
-    @participant = @group.participants.build
-
-    respond_to do |format|
-      format.html
-      format.turbo_stream do
-        # calculation-results 部分だけを更新
-        render turbo_stream: turbo_stream.replace(
-          'calculation-results',
-          partial: 'groups/calculation_results',
-          locals: {
-            per_person_amount: @per_person_amount,
-            grouped_amounts: @grouped_amounts,
-            num_participants: @participants&.count || 0,
-            total_amount: total_amount_input,
-            remainder_amount: @remainder_amount,
-            error_message: nil
-          }
-        )
-      end
+  def update
+    if @group.update(group_params)
+      recalculate_and_respond
+    else
+      render :show, status: :unprocessable_entity
     end
   end
 
-  def save_calculations; end
+  def destroy
+    @group.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@group) }
+      format.html { redirect_to groups_path, notice: 'グループが削除されました。' }
+    end
+  end
+
+  def share
+    @group = Group.find_by!(share_token: params[:share_token])
+    participants = @group.participants
+    @result = BillSplitterService.new(@group.total_amount, participants).call
+  end
 
   private
 
@@ -67,15 +59,42 @@ class GroupsController < ApplicationController
   end
 
   def group_create_params
-    # params.expect(group: [:name, :participant_count])
     params.expect(group: [:name])
   end
 
-  def group_show_params
-    params.expect(group: [:id])
+  def set_group
+    @group = Group.created_by_session(session.id.public_id).find(params[:id])
   end
 
-  def set_group
-    @group = Group.find(params[:id])
+  # updateアクションの再計算処理
+  def recalculate_and_respond
+    @participants = @group.participants.order(created_at: :asc)
+    total_amount_input = @group.total_amount || 0
+    result = BillSplitterService.new(total_amount_input, @participants).call
+
+    respond_to do |format|
+      format.html { redirect_to groups_path }
+
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          'calculation_results',
+          partial: 'groups/calculation_results',
+          locals: { result: result }
+        )
+      end
+    end
+  end
+
+  def create_initial_participants
+    return if @group.participant_count.zero?
+
+    @group.participant_count.times do |i|
+      @group.participants.create(name: "参加者 #{i + 1}")
+    end
+  end
+
+  def load_session_groups
+    create_groups = Group.created_by_session(session.id.public_id).order(created_at: :desc)
+    @groups = create_groups.page(params[:page]).per(5)
   end
 end

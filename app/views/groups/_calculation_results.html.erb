@@ -1,47 +1,40 @@
-<div class="mt-4 p-4 bg-white rounded-lg shadow-sm">
-    <% if per_person_amount %>
-        <h4 class="text-xl font-bold text-green-800 text-center mb-4">
-        一人あたりの基本金額: <%= number_to_currency(per_person_amount, precision: 0, unit: "¥") %>
-        </h4>
-
-        <div class="space-y-4">
-            <div class="flex justify-between items-center text-gray-600 text-sm border-b pb-2">
-                <span>参加者</span>
-                <span>支払い金額</span>
-            </div>
-            <% grouped_amounts.each do |amount, participants_for_amount| %>
-                <div class="flex justify-between items-center py-2 <%= 'border-b border-gray-200' unless amount == grouped_amounts.keys.last %>">
+<div class="mt-4 p-4 bg-white rounded-lg shadow-sm text-lg">
+    <% payment_rows = result[:payment_rows] %>
+    <% summary = result[:summary] %>
+    <% if payment_rows.present? %>
+        <% payment_rows.each do |row| %>
+            <div class="flex justify-between items-center py-2 <%= 'border-b border-gray-200' unless row == payment_rows.last %>">
                 <div>
-                    <% if participants_for_amount.count == 1 %>
-                    <span class="font-medium"><%= participants_for_amount.first.name %></span>
+                    <% if row[:participants].count == 1 %>
+                        <span><%= row[:participants].first.name %></span>
                     <% else %>
-                    <div class="font-medium">その他のユーザー</div>
-                    <div class="text-sm text-gray-500">
-                        <%= participants_for_amount.map(&:name).join('・') %>
-                    </div>
+                        <div ><%= row[:participants].count %>人のグループ</div>
+                        <div class="text-gray-700 pl-2">
+                          <% row[:participants].each do |participant| %>
+                            <div>
+                              <%= participant.name %>
+                            </div>
+                          <% end %>
+                        </div>
                     <% end %>
                 </div>
-                <span class="font-bold">
-                    <%= number_to_currency(amount, precision: 0, unit: "¥") %>
+                <span class="font-bold ">
+                  <%= number_to_currency(row[:amount], precision: 0, unit: "¥", format: "%u%n") %>
                 </span>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="bg-gray-50 rounded-lg p-4 mt-6">
-            <div class="flex justify-between text-sm">
-                <span>参加人数</span>
-                <span>合計金額</span>
-                <span>端数</span>
             </div>
-            <div class="flex justify-between font-bold text-lg mt-1">
-                <span><%= num_participants %>人</span>
-                <span><%= number_to_currency(total_amount, precision: 0, unit: "¥") %></span>
-                <span><%= number_to_currency(remainder_amount, precision: 0, unit: "¥") %></span>
+        <% end %>
+        <div class="bg-gray-50 rounded-lg p-4 mt-6 text-lg">
+            <div class="flex justify-between text-gray-600">
+                <span>元の合計金額</span>
+                <span>実際の支払合計</span>
+                <span>端数・残高</span>
+            </div>
+            <div class="flex justify-between font-bold mt-1">
+                <span><%= number_to_currency(summary[:total_amount], precision: 0, unit: "¥", format: "%u%n") %></span>
+                <span><%= number_to_currency(summary[:total_paid], precision: 0, unit: "¥", format: "%u%n") %></span>
+                <span class="text-red-500"><%= number_to_currency(summary[:remainder], precision: 0, unit: "¥", format: "%u%n") %></span>
             </div>
         </div>
-    <% elsif error_message %>
-        <p class="text-red-600 text-center"><%= error_message %></p>
     <% else %>
         <p class="text-gray-600 text-center">合計金額を入力して割り勘を計算しましょう。</p>
     <% end %>

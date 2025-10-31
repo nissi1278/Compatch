@@ -1,0 +1,13 @@
+<%= turbo_frame_tag dom_id(group), data: { controller: "clickable-card", action: "click->clickable-card#redirect", url: group_path(group) } do %>
+    <div class="border border-gray-200 rounded-lg p-4 mb-2">
+        <div class="flex items-center justify-between">
+            <span class="font-bold text-lg"><%= group.name %></span>
+            <%= link_to group_path(group), data: { "clickable-card-target": "exception", turbo_method: :delete, turbo_confirm: "グループ#{group.name}を削除しますか？" } do %>
+              <%= render 'shared/trash_icon' %>
+            <% end %>
+        </div>
+        <div>
+            <span class="text-sm"><%= group.created_at.strftime("作成日: %Y年%m月%d日 %T") %></span>
+        </div>
+    </div>
+<% end %>

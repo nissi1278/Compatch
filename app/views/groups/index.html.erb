@@ -1,45 +1,32 @@
-<div class="container">
-    <% if @group.errors.any? %>
-        <div>
-            <h2 class=""><%= @group.errors.count %>件のエラーがあります。</h2>
-            <ul class="">
-                <%= @group.errors.full_message.each do |message| %>
-                    <li class=""><%= message %></li>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
-
     <div class="white-card w-full flex flex-wrap justify-center mb-5">
         <div class="w-full lg:w-8/12 px-4">
             <div class="border-0 p-4">
                 <div class="flex items-center mb-3">
-                    <i class="fas fa-calculator calculator-icon"></i>
                     <h2 class="section-title mb-0">飲み会グループ作成</h2>
                 </div>
                 <p class="form-label text-gray-500 mb-4">飲み会のグループを作成しよう。</p>
-                <%= form_with model: @group, local: true, class: "group-form" do |form| %>
+                <%= form_with model: @group, class: "group-form" do |form| %>
                     <div class="mb-4">
                         <%= form.text_field :name, 
                             class: "input-field", 
                             placeholder: "グループ名を入力",
                             value: "" %>
+                        <%= inline_error_for(form, :name) %>
                     </div> 
-                    
                     <div class="mb-4">
                         <label class="form-label text-gray-500">参加人数を選択してね。</label>
                         <div class="participant-counter justify-between">
                             <%= form.number_field :participant_count, 
-                                value: 5, 
                                 min: 1,
                                 class: "input-field",
                                 style: "width: auto;" %>
+                            <%= inline_error_for(form, :participant_count) %>
                             <button class="counter-btn" type="button" onclick="incrementCounter()">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    
+
                     <%= form.submit class: "btn bg-blue-600 w-full" do %>
                         <i class="fas fa-plus mr-2"></i>
                         グループを作成
@@ -50,9 +37,16 @@
     </div>
     <div class="white-card flex flex-wrap justify-center pt-3">
         <div class="w-full lg:w-8/12 px-4">
-            <div class="flex items-center mb-4">
-                <i class="fas fa-calculator text-blue-500 text-4xl"></i>
-                <h2 class="section-title mb-0">最近作成したグループ</h2>
+            <div class="border-0 p-4">
+                <div class="mb-3">
+                    <h2 class="section-title mb-0">最近作成したグループ</h2>
+                </div>
+                <div class="space-y-2">
+                    <%= render @groups %>
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <%= paginate @groups if @groups.total_pages > 1 %>
+                </div>
             </div>
         </div>
     </div>
