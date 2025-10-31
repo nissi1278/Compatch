@@ -26,15 +26,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install AWS CLI v2
+      - name: Check AWS CLI Version (After Auth)
         run: |
-          echo "Installing AWS CLI v2..."
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip -q awscliv2.zip
-          sudo ./aws/install --update
-          rm awscliv2.zip
-          rm -rf aws
-          echo "AWS CLI version:"
+          echo "Path to aws:"
+          which aws
+          echo "AWS CLI Version:"
           aws --version
 
       # AWSの認証情報を設定 (OIDC)
@@ -51,6 +47,10 @@ jobs:
       # zipファイルをS3にアップロード
       - name: Upload artifact to S3
         run: |
+          echo "Path to aws (before deploy):"
+          which aws
+          echo "AWS CLI Version (before deploy):"
+          aws --version
           S3_KEY="${{ env.S3_KEY_PREFIX }}/deploy_artifact-${{ github.sha }}.zip"
           echo "Uploading to s3://${{ env.S3_BUCKET }}/${S3_KEY}"
           aws s3 cp deploy_artifact.zip s3://${{ env.S3_BUCKET }}/${S3_KEY}
