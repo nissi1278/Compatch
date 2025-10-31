@@ -1,0 +1,57 @@
+name: CD (Deploy to AWS EC2)
+
+on:
+  push:
+    branches:
+      - main
+
+# OIDC (キー不要のAWS認証) のための権限設定
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # ジョブレベルで環境変数を定義
+    env:
+      AWS_REGION: ap-northeast-1
+      S3_BUCKET: compatch-codedeploy-artifact
+      S3_KEY_PREFIX: Compatch
+      APP_NAME: compatch
+      GROUP_NAME: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # AWSの認証情報を設定 (OIDC)
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::738703225729:role/compatch-githubaction-codedeploy-role
+          aws-region: ${{ env.AWS_REGION }}
+
+      # デプロイ用zipファイルの作成
+      - name: Create deployment artifact
+        run: zip -r deploy_artifact.zip . -x ".git/*" ".github/*" ".idea/*"
+
+      # zipファイルをS3にアップロード
+      - name: Upload artifact to S3
+        run: |
+          S3_KEY="${{ env.S3_KEY_PREFIX }}/deploy_artifact-${{ github.sha }}.zip"
+          echo "Uploading to s3://${{ env.S3_BUCKET }}/${S3_KEY}"
+          aws s3 cp deploy_artifact.zip s3://${{ env.S3_BUCKET }}/${S3_KEY}
+
+      # AWS CodeDeploy にデプロイを指示
+      - name: Start CodeDeploy Deployment
+        run: |
+          S3_KEY="${{ env.S3_KEY_PREFIX }}/deploy_artifact-${{ github.sha }}.zip"
+          echo "Deploying from s3://${{ env.S3_BUCKET }}/${S3_KEY}"
+          
+          aws codedeploy create-deployment \
+            --application-name ${{ env.APP_NAME }} \
+            --deployment-group-name ${{ env.GROUP_NAME }} \
+            --s3-location bucket=${{ env.S3_BUCKET }},key=${S3_KEY},bundleType=zip \
+            --description "Deployed commit ${{ github.sha }} from GitHub Actions"
