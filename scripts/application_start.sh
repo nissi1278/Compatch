@@ -9,6 +9,7 @@ chown -R ec2-user:ec2-user $DEPLOY_DIR
 su -l ec2-user -c "
   cd $DEPLOY_DIR
   bundle install --without development test
+  RAILS_ENV=production bundle exec rails tailwind:build
   RAILS_ENV=production bundle exec rails db:migrate
   RAILS_ENV=production bundle exec rails assets:precompile
 "
