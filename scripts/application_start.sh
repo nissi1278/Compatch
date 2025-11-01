@@ -2,6 +2,9 @@
 export DEPLOY_DIR="/home/ec2-user/Compatch"
 export HOME="/home/ec2-user"
 
+# Installフックでrootが配置した全ファイルの所有権をec2-userに戻す
+chown -R ec2-user:ec2-user $DEPLOY_DIR
+
 su -l ec2-user -c "
   cd $DEPLOY_DIR
 
