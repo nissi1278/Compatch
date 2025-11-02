@@ -16,7 +16,7 @@ aws ssm get-parameters \
   --query "Parameters[0].Value" \
   --output text > /run/puma/environment
 
-sed -i -e 's/^/RAILS_MASTER_KEY=/' /run/puma/environment
+sed -i -e 's/^/export RAILS_MASTER_KEY=/' /run/puma/environment
 
 # ファイルの権限をec2-userのみに絞る
 chown ec2-user:ec2-user /run/puma/environment
