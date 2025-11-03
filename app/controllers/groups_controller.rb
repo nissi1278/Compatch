@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_create_params)
     @group.participant_count = params[:group][:participant_count].to_i
-    @group.session_id = session.id
+    @group.guest_token = current_guest_token
 
     if @group.save
       create_initial_participants
@@ -63,7 +63,7 @@ class GroupsController < ApplicationController
   end
 
   def set_group
-    @group = Group.created_by_session(session.id.public_id).find(params[:id])
+    @group = Group.created_by_session(current_guest_token).find(params[:id])
   end
 
   # updateアクションの再計算処理
@@ -94,7 +94,7 @@ class GroupsController < ApplicationController
   end
 
   def load_session_groups
-    create_groups = Group.created_by_session(session.id.public_id).order(created_at: :desc)
+    create_groups = Group.created_by_session(current_guest_token).order(created_at: :desc)
     @groups = create_groups.page(params[:page]).per(5)
   end
 end
