@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_19_202005) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_092017) do
   create_table "groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "session_id", null: false
     t.integer "total_amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "share_token"
+    t.string "guest_token", null: false
+    t.index ["guest_token"], name: "index_groups_on_guest_token"
     t.index ["share_token"], name: "index_groups_on_share_token", unique: true
   end
 

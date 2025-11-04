@@ -13,7 +13,7 @@ class Group < ApplicationRecord
   has_secure_token :share_token
 
   after_initialize :set_default_participant_count
-  scope :created_by_session, ->(session_id) { where(session_id: session_id) }
+  scope :created_by_session, ->(token) { where(guest_token: token) }
 
   private
 
