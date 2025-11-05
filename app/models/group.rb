@@ -2,12 +2,18 @@ class Group < ApplicationRecord
   has_many :participants, dependent: :destroy
   attr_accessor :participant_count
 
+  MAXIMUM_NAME_LENGTH = 20
+  MINIMUM_PARTICIPANT_COUNT = 0
+  MAXIMUM_PARTICIPANT_COUNT = 30
+
   validates :name,
             presence: true,
-            length: { maximum: 20 }
+            length: { maximum: MAXIMUM_NAME_LENGTH }
   validates :participant_count,
             presence: true,
-            numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+            numericality: { only_integer: true,
+                            greater_than_or_equal_to: MINIMUM_PARTICIPANT_COUNT,
+                            less_than_or_equal_to: MAXIMUM_PARTICIPANT_COUNT },
             on: :create
 
   has_secure_token :share_token
