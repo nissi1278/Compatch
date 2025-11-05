@@ -7,7 +7,7 @@ class Group < ApplicationRecord
             length: { maximum: 20 }
   validates :participant_count,
             presence: true,
-            numericality: { only_integer: true, greater_than: 0 },
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 },
             on: :create
 
   has_secure_token :share_token
