@@ -11,9 +11,11 @@ ja:
       group: グループ
       participant: 参加者
       total_amount: 合計金額
+      Participant_count: 参加者数
     attributes:
       group:
         name: グループ名
+        participant_count: 参加者数
       participant:
         name: 参加者名
       total_amount:
