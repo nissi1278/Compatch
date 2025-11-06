@@ -26,19 +26,21 @@
                 </span>
             </div>
         <% end %>
-        <div class="bg-gray-50 rounded-lg p-4 mt-6 text-lg">
-            <div class="flex justify-between text-gray-600">
-                <span>レシート金額</span>
-                <span>集金合計額</span>
-                <span>端数・残高</span>
-            </div>
-            <div class="flex justify-between font-bold mt-1">
-                <span><%= number_to_currency(summary[:total_amount], precision: 0, unit: "¥", format: "%u%n") %></span>
-                <span><%= number_to_currency(summary[:total_paid], precision: 0, unit: "¥", format: "%u%n") %></span>
-                <span class="text-red-500"><%= number_to_currency(summary[:remainder], precision: 0, unit: "¥", format: "%u%n") %></span>
-            </div>
+        <div class="bg-gray-50 rounded-lg p-4 mt-6 text-lg grid grid-cols-3">
+          <div>
+            <p>レシート金額</p>
+            <p><%= number_to_currency(summary[:total_amount], precision: 0, unit: "¥", format: "%u%n") %></p>
+          </div>
+          <div>
+            <p>集金合計額</p>
+            <p><%= number_to_currency(summary[:total_paid], precision: 0, unit: "¥", format: "%u%n") %></p>
+          </div>
+          <div>
+            <p>端数・残高</p>
+            <p class="text-red-500"><%= number_to_currency(summary[:remainder], precision: 0, unit: "¥", format: "%u%n") %></p>
+          </div>
         </div>
     <% else %>
-        <p class="text-gray-600 text-center">合計金額を入力して割り勘を計算しましょう。</p>
+      <p class="text-gray-600 text-center"> レシート金額を入力して割り勘を計算しましょう。</p>
     <% end %>
 </div>
