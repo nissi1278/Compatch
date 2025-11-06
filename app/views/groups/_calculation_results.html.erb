@@ -8,7 +8,7 @@
                     <% if row[:participants].count == 1 %>
                         <span><%= row[:participants].first.name %></span>
                     <% else %>
-                        <div ><%= row[:participants].count %>人のグループ</div>
+                        <div >同じ支払い額(<%= row[:participants].count %>人)</div>
                         <div class="text-gray-700 pl-2">
                           <% row[:participants].each do |participant| %>
                             <div>
@@ -18,7 +18,10 @@
                         </div>
                     <% end %>
                 </div>
-                <span class="font-bold ">
+                <span class="font-bold">
+                  <% if row[:participants].count > 1 %>
+                    1人あたりの支払い額:
+                  <% end %>
                   <%= number_to_currency(row[:amount], precision: 0, unit: "¥", format: "%u%n") %>
                 </span>
             </div>

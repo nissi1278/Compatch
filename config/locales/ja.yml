@@ -19,4 +19,4 @@ ja:
         total_amount: レシート金額
       participant:
         name: 参加者名
-        payment_amount: 負担額
+        payment_amount: 支払い額
