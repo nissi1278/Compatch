@@ -16,7 +16,7 @@ ja:
       group:
         name: グループ名
         participant_count: 参加者数
+        total_amount: 合計金額
       participant:
         name: 参加者名
-      total_amount:
-        name: 合計金額
+        payment_amount: 負担額

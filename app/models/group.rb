@@ -5,6 +5,8 @@ class Group < ApplicationRecord
   MAXIMUM_NAME_LENGTH = 20
   MINIMUM_PARTICIPANT_COUNT = 0
   MAXIMUM_PARTICIPANT_COUNT = 30
+  MINIMUM_TOTAL_AMOUNT = 0
+  MAXIMUM_TOTAL_AMOUNT = 1_000_000
 
   validates :name,
             presence: true,
@@ -15,6 +17,11 @@ class Group < ApplicationRecord
                             greater_than_or_equal_to: MINIMUM_PARTICIPANT_COUNT,
                             less_than_or_equal_to: MAXIMUM_PARTICIPANT_COUNT },
             on: :create
+  validates :total_amount,
+            presence: true,
+            numericality: { only_integer: true,
+                            greater_than_or_equal_to: MINIMUM_TOTAL_AMOUNT,
+                            less_than_or_equal_to: MAXIMUM_TOTAL_AMOUNT }
 
   has_secure_token :share_token
 
