@@ -12,7 +12,7 @@
             <%= form.number_field :total_amount,
                 class: "input-field w-full p-2 border rounded-md", 
                 placeholder: "レシート金額を入力",
-                data: { action: "input->auto-submit#submit" },
+                data: { action: "change->auto-submit#submit" },
                 min: 0
             %>
             <%= inline_error_for(form, :total_amount) %>

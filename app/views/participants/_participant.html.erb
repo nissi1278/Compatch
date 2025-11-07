@@ -50,7 +50,7 @@
               class: "w-full pl-8 pr-12 py-3 border border-gray-300 rounded-lg text-right",
               placeholder: "0",
               data: { "adjustment-form-target": "displayAmount editableElement",
-                      action: "input->adjustment-form#manualUpdate" },
+                      action: "change->adjustment-form#manualUpdate" },
               disabled: !participant.is_manual_fixed?
           %>
           <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">円</span>
