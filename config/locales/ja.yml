@@ -10,13 +10,13 @@ ja:
     models:
       group: グループ
       participant: 参加者
-      total_amount: 合計金額
+      total_amount: レシート金額
       Participant_count: 参加者数
     attributes:
       group:
         name: グループ名
         participant_count: 参加者数
-        total_amount: 合計金額
+        total_amount: レシート金額
       participant:
         name: 参加者名
-        payment_amount: 負担額
+        payment_amount: 支払い額

@@ -24,7 +24,9 @@
                 data-adjustment-value="-1000"
                 data-adjustment-form-target="editableElement"
                 <%= 'disabled' unless participant.is_manual_fixed? %>>
-          -
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 mx-auto">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+          </svg>
         </button>
         <button type="button"
                 class="btn btn-primary text-lg flex-1"
@@ -32,7 +34,9 @@
                 data-adjustment-value="1000"
                 data-adjustment-form-target="editableElement"
                 <%= 'disabled' unless participant.is_manual_fixed? %>>
-          +
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 mx-auto">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
         </button>
       </div>
 

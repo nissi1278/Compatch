@@ -5,13 +5,13 @@
     <div class="white-card border-0 p-4">
         <div class="flex items-center gap-3 mb-4">
         <i class="fas fa-calculator text-blue-600"></i>
-        <h2 class="text-xl font-semibold text-gray-700">合計金額</h2>
+        <h2 class="text-xl font-semibold text-gray-700">レシート金額</h2>
         </div>
         
         <%= form_with(model: @group, url: group_path(@group), method: :patch, data: { controller: "auto-submit" }) do |form| %>
             <%= form.number_field :total_amount,
                 class: "input-field w-full p-2 border rounded-md", 
-                placeholder: "合計金額を入力", 
+                placeholder: "レシート金額を入力",
                 data: { action: "input->auto-submit#submit" },
                 min: 0
             %>
@@ -46,10 +46,11 @@
         <h2 class="text-xl font-semibold text-gray-700">参加者管理</h2>
         </div>
 
-        <div id="participants_list" class="space-y-4">
-            <%= render @participants %>
-        </div>
-
+      <div id="participants_list"
+           class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
+            overflow-y-auto max-h-96">
+        <%= render @participants %>
+      </div>
         <%= turbo_frame_tag "new_participant_form" do %>
             <%= render 'participants/form', group: @group, participant: @participant %>
         <% end %>
