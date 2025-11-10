@@ -27,16 +27,21 @@ Compatchは飲み会やコンパにおける、幹事の為の割り勘・集金
 
 ## 🖼️画面イメージ
 - 初期画面
-    ![初期画面](document/design_assets/service_start_screen.png)
+
+![初期画面](document/design_assets/service_start_screen.png)
 
 - グループ作成・管理画面
-    ![グループ作成・管理画面](document/design_assets/group_management_screen.png)
+
+![グループ作成・管理画面](document/design_assets/group_management_screen.png)
 
 - 計算画面
-    ![計算画面](document/design_assets/calculation_screen.png)
+
+![計算画面](document/design_assets/calculation_screen.png)
 
 - 結果共有画面
-    ![結果共有画面](document/design_assets/result_share_screen.png)
+
+![結果共有画面](document/design_assets/result_share_screen.png)
+
 ---
 
 ## ✨サービス機能一覧
