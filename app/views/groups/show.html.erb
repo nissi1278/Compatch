@@ -49,10 +49,10 @@
       <div id="participants_list"
            class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
             overflow-y-auto max-h-96">
-        <%= render @participants %>
+        <%= render partial: 'groups/participants/participant', collection: @participants %>
       </div>
         <%= turbo_frame_tag "new_participant_form" do %>
-            <%= render 'participants/form', group: @group, participant: @participant %>
+            <%= render 'groups/participants/form', group: @group, participant: @participant %>
         <% end %>
     </div>
 </div>
