@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[show update destroy]
+  include GroupSetup
   include CalculationResponder
 
   def index
@@ -8,7 +9,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    set_show_variables
+    setup_calculation_view_variables
   end
 
   def create
@@ -28,7 +29,7 @@ class GroupsController < ApplicationController
     if @group.update(group_params)
       recalculate_and_respond
     else
-      set_show_variables
+      setup_calculation_view_variables
       render :show, status: :unprocessable_entity
     end
   end
@@ -91,14 +92,5 @@ class GroupsController < ApplicationController
   def load_session_groups
     create_groups = Group.created_by_session(current_guest_token).order(created_at: :desc)
     @groups = create_groups.page(params[:page]).per(5)
-  end
-
-  def set_show_variables
-    @participants = @group.participants.order(created_at: :asc)
-    # 新しい参加者を追加するための空のインスタンス
-    @participant = @group.participants.build
-    total_amount_input = @group.total_amount || 0
-
-    @result = BillSplitterService.new(total_amount_input, @participants).call
   end
 end

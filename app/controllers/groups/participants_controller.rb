@@ -1,6 +1,7 @@
 module Groups
   class ParticipantsController < ApplicationController
     before_action :set_group
+    include GroupSetup
     include CalculationResponder
 
     def create
@@ -10,8 +11,12 @@ module Groups
 
     def update
       @participant = @group.participants.find(params[:id])
-      @participant.update(participant_params)
-      recalculate_and_respond_for_update
+      if @participant.update(participant_params)
+        recalculate_and_respond_for_update
+      else
+        setup_calculation_view_variables
+        render 'groups/show', status: :unprocessable_entity
+      end
     end
 
     def destroy
