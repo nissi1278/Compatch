@@ -8,7 +8,7 @@ module ApplicationHelper
     error_messages = object.errors.full_messages_for(attribute)
     tag.div class: %w[error-message text-red-600],
             data: { controller: 'auto-dismiss',
-                   value: 5000 } do
+                    value: 5000 } do
       error_list = error_messages.map do |message|
         tag.li(message)
       end
