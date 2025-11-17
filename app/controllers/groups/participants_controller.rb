@@ -65,13 +65,13 @@ module Groups
         # 新しい参加者をリストの末尾に追加
         turbo_stream.append(
           'participants_list',
-          partial: 'participants/participant',
+          partial: 'groups/participants/participant',
           locals: { participant: @participant }
         ),
         # 新規追加フォームをリセット
         turbo_stream.replace(
           'new_participant_form',
-          partial: 'participants/form',
+          partial: 'groups/participants/form',
           locals: { group: @group, participant: @new_participant_for_form }
         ),
         # 計算結果を更新
