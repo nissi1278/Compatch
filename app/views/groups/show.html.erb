@@ -12,7 +12,7 @@
             <%= form.number_field :total_amount,
                 class: "input-field w-full p-2 border rounded-md", 
                 placeholder: "レシート金額を入力",
-                data: { action: "input->auto-submit#submit" },
+                data: { action: "change->auto-submit#submit" },
                 min: 0
             %>
             <%= inline_error_for(form, :total_amount) %>
@@ -49,10 +49,10 @@
       <div id="participants_list"
            class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3
             overflow-y-auto max-h-96">
-        <%= render @participants %>
+        <%= render partial: 'groups/participants/participant', collection: @participants %>
       </div>
         <%= turbo_frame_tag "new_participant_form" do %>
-            <%= render 'participants/form', group: @group, participant: @participant %>
+            <%= render 'groups/participants/form', group: @group, participant: @participant %>
         <% end %>
     </div>
 </div>

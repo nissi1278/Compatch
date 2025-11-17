@@ -1,6 +1,7 @@
 module Groups
   class ParticipantsController < ApplicationController
     before_action :set_group
+    include GroupSetup
     include CalculationResponder
 
     def create
@@ -10,8 +11,12 @@ module Groups
 
     def update
       @participant = @group.participants.find(params[:id])
-      @participant.update(participant_params)
-      recalculate_and_respond_for_update
+      if @participant.update(participant_params)
+        recalculate_and_respond_for_update
+      else
+        setup_calculation_view_variables
+        render 'groups/show', status: :unprocessable_entity
+      end
     end
 
     def destroy
@@ -60,13 +65,13 @@ module Groups
         # 新しい参加者をリストの末尾に追加
         turbo_stream.append(
           'participants_list',
-          partial: 'participants/participant',
+          partial: 'groups/participants/participant',
           locals: { participant: @participant }
         ),
         # 新規追加フォームをリセット
         turbo_stream.replace(
           'new_participant_form',
-          partial: 'participants/form',
+          partial: 'groups/participants/form',
           locals: { group: @group, participant: @new_participant_for_form }
         ),
         # 計算結果を更新
