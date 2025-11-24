@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   has_many :participants, dependent: :destroy
   attr_accessor :participant_count
 
+  INIT_PARTICIPANT_COUNT = 5
   MAXIMUM_NAME_LENGTH = 20
   MINIMUM_PARTICIPANT_COUNT = 0
   MAXIMUM_PARTICIPANT_COUNT = 30
@@ -32,6 +33,6 @@ class Group < ApplicationRecord
 
   # 画面初期表示時の参加者人数の初期値を設定
   def set_default_participant_count
-    self.participant_count ||= 5
+    self.participant_count ||= INIT_PARTICIPANT_COUNT
   end
 end
