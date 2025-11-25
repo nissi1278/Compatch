@@ -48,14 +48,13 @@
           <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">¥</span>
           <%= form.number_field :payment_amount,
               class: "w-full pl-8 pr-12 py-3 border border-gray-300 rounded-lg text-right",
-              placeholder: "0",
               data: { "adjustment-form-target": "displayAmount editableElement",
                       action: "change->adjustment-form#manualUpdate" },
               disabled: !participant.is_manual_fixed?
           %>
           <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">円</span>
-          <%= inline_error_for(form, :payment_amount) %>
         </div>
+        <%= inline_error_for(form, :payment_amount) %>
       </div>
     </div>
   <% end %>

@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { useDebounce } from "stimulus-use"
 
 export default class extends Controller {
   // JSが操作するHTML要素をすべてターゲットとして登録
@@ -12,7 +13,15 @@ export default class extends Controller {
     "editableElement"
   ]
 
+  static debounces = [
+    {
+      name: "debounce_request_submit",
+      wait: 500
+    }
+  ]
+
   connect() {
+    useDebounce(this)
   }
 
   // 「金額固定」チェックボックスの処理
@@ -34,6 +43,7 @@ export default class extends Controller {
     this.element.requestSubmit()
   }
 
+
   // 「多め」「少なめ」などの調整ボタンの処理
   applyAdjustment(event) {
     event.preventDefault()
@@ -46,6 +56,10 @@ export default class extends Controller {
     this.paymentAmountFieldTarget.value = newAmount
     this.displayAmountTarget.value = newAmount
 
+    this.debounce_request_submit()
+  }
+
+  debounce_request_submit() {
     this.element.requestSubmit()
   }
 
