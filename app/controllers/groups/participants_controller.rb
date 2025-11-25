@@ -45,13 +45,7 @@ module Groups
     # 更新時の応答 (計算結果のみ更新)
     def recalculate_and_respond_for_update
       result = recalculate_result
-      render turbo_stream: [
-        turbo_stream.update(
-          'calculation_results',
-          partial: 'groups/calculation_results',
-          locals: { result: result }
-        )
-      ]
+      respond_with_recalculation(result)
     end
 
     # rubocop:disable Metrics/MethodLength
@@ -61,7 +55,7 @@ module Groups
       # 新しい参加者を追加するための空のインスタンスを再度用意
       @new_participant_for_form = @group.participants.build
 
-      render turbo_stream: [
+      create_streams = [
         # 新しい参加者をリストの末尾に追加
         turbo_stream.append(
           'participants_list',
@@ -81,15 +75,25 @@ module Groups
           locals: { result: result }
         )
       ]
+
+      respond_with_recalculation(result, *create_streams)
     end
     # rubocop:enable Metrics/MethodLength
 
     # 削除時の応答 (リストからの削除 + 計算結果の更新)
     def recalculate_and_respond_for_destroy
       result = recalculate_result
+      destroy_streams = [
+        # 指定した参加者をリストから削除
+        turbo_stream.remove(@participant)
+      ]
+      respond_with_recalculation(result, *destroy_streams)
+    end
+
+    # 更新処理時の結果を返すturboレスポンスを作成
+    def respond_with_recalculation(result, *streams)
       render turbo_stream: [
-        # 1. 指定した参加者をリストから削除
-        turbo_stream.remove(@participant),
+        *streams,
         # 2. 計算結果を更新
         turbo_stream.update('calculation_results', partial: 'groups/calculation_results', locals: { result: result })
       ]
