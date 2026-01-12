@@ -19,8 +19,9 @@ gem "tailwindcss-rails", "~> 4.3.0"
 gem "puma"
 gem "kaminari", "~> 1.2.0"
 gem "rails-i18n", "~>8.0.0"
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "omniauth"
+gem "omniauth-rails_csrf_protection"
+gem "omniauth_openid_connect"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
